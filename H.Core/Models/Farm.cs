@@ -1,6 +1,9 @@
 ﻿#region Imports
 
+using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers;
@@ -9,7 +12,6 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Feed;
 using H.Core.Providers.Soil;
 using H.Core.Tools;
-using H.Core.Models.Infrastructure;
 using H.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -18,13 +20,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Permissions;
-using System.Windows.Controls.Primitives;
-using System.Windows.Navigation;
-using AutoMapper.Configuration.Conventions;
-using H.Core.Models.Animals;
-using H.Core.Converters;
-using H.Core.Emissions.Results;
 
 #endregion
 
@@ -934,9 +929,19 @@ namespace H.Core.Models
             return this.ClimateData.GetTotalPrecipitationForYear(year);
         }
 
+        public double GetAnnualPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
+        {
+            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalPrecipitationForYear(year);
+        }
+
         public double GetAnnualEvapotranspiration(int year)
         {
             return this.ClimateData.GetTotalEvapotranspirationForYear(year);
+        }
+
+        public double GetAnnualEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
+        {
+            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalEvapotranspirationForYear(year);
         }
 
         public double GetGrowingSeasonPrecipitation(int year)
@@ -944,9 +949,19 @@ namespace H.Core.Models
             return this.ClimateData.GetGrowingSeasonPrecipitation(year);
         }
 
+        public double GetGrowingSeasonPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
+        {
+            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonPrecipitation(year);
+        }
+
         public double GetGrowingSeasonEvapotranspiration(int year)
         {
             return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
+        }
+
+        public double GetGrowingSeasonEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
+        {
+            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonEvapotranspiration(year);
         }
 
         /// <summary>
@@ -1161,6 +1176,36 @@ namespace H.Core.Models
                     return this.DefaultSoilData;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns field-level climate data if the field has <see cref="FieldSystemComponent.UseFieldLevelClimateData"/> enabled and has
+        /// daily climate data available, otherwise returns the farm-level <see cref="ClimateData"/>.
+        /// </summary>
+        public ClimateData GetPreferredClimateData(FieldSystemComponent fieldSystemComponent)
+        {
+            if (fieldSystemComponent == null)
+            {
+                return this.ClimateData;
+            }
+
+            if (fieldSystemComponent.UseFieldLevelClimateData && fieldSystemComponent.ClimateData != null && fieldSystemComponent.ClimateData.DailyClimateData.Any())
+            {
+                return fieldSystemComponent.ClimateData;
+            }
+
+            return this.ClimateData;
+        }
+
+        /// <summary>
+        /// Returns field-level climate data if the field associated with the <see cref="CropViewItem"/> has field-level climate enabled,
+        /// otherwise returns the farm-level <see cref="ClimateData"/>.
+        /// </summary>
+        public ClimateData GetPreferredClimateData(CropViewItem cropViewItem)
+        {
+            var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+
+            return this.GetPreferredClimateData(fieldComponent);
         }
 
         public List<CropViewItem> GetAllCropViewItems()

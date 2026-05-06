@@ -176,9 +176,10 @@ namespace H.Core.Calculators.Carbon
             var year = nextYearViewItem.Year;
             var moistureContentAsPercentage = nextYearViewItem.MoistureContentOfCropPercentage;
             var carbonConcentration = nextYearViewItem.CarbonConcentration;
-            var totalPrecipitationForTheYear = farm.ClimateData.GetTotalPrecipitationForYear(year);
-            var totalEvapotranspirationForTheYear = farm.ClimateData.GetTotalEvapotranspirationForYear(year);
-            var proportionOfPrecipitationMayThroughSeptember = farm.ClimateData.ProportionOfPrecipitationFallingInMayThroughSeptember(year);
+            var climateData = farm.GetPreferredClimateData(nextYearViewItem);
+            var totalPrecipitationForTheYear = climateData.GetTotalPrecipitationForYear(year);
+            var totalEvapotranspirationForTheYear = climateData.GetTotalEvapotranspirationForYear(year);
+            var proportionOfPrecipitationMayThroughSeptember = climateData.ProportionOfPrecipitationFallingInMayThroughSeptember(year);
 
             var result = this.CalculateProductivity(
                 annualPrecipitation: totalPrecipitationForTheYear,

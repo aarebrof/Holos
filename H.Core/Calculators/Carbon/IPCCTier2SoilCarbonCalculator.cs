@@ -245,7 +245,7 @@ namespace H.Core.Calculators.Carbon
                 parameter: ModelParameters.MaximumAvgTemperature,
                 tillageType: currentYearViewItem.TillageType);
 
-            var climateData = farm.ClimateData;
+            var climateData = farm.GetPreferredClimateData(currentYearViewItem);
 
             var precipitationsForYear = climateData.GetMonthlyPrecipitationsForYear(
                 year: currentYearViewItem.Year).Select(x => x.Value).ToList();

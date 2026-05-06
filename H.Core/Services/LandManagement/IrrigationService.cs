@@ -49,14 +49,15 @@ namespace H.Core.Services.LandManagement
         /// </summary>
         public double GetTotalWaterInputs(Farm farm, CropViewItem viewItem)
         {
-            var climateDataGroupedByYear = farm.ClimateData.DailyClimateData.GroupBy(userClimateData => userClimateData.Year);
+            var climateData = farm.GetPreferredClimateData(viewItem);
+            var climateDataGroupedByYear = climateData.DailyClimateData.GroupBy(userClimateData => userClimateData.Year);
             var climateDataForYear = climateDataGroupedByYear.SingleOrDefault(groupingByYear => groupingByYear.Key == viewItem.Year);
             var result = 0d;
 
             if (climateDataForYear != null && climateDataForYear.Count() == 365)
             {
                 // Use daily climate data
-                var precipitationList = climateDataForYear.OrderBy(climateData => climateData.JulianDay).Select(climateData => climateData.MeanDailyPrecipitation).ToList();
+                var precipitationList = climateDataForYear.OrderBy(cd => cd.JulianDay).Select(cd => cd.MeanDailyPrecipitation).ToList();
 
                 // Add irrigation amounts to daily precipitations
                 var totalPrecipitationList = this.AddIrrigationToDailyPrecipitations(precipitationList, farm, viewItem);
@@ -66,7 +67,7 @@ namespace H.Core.Services.LandManagement
             else
             {
                 // We don't have a complete set of daily values, use normals as a fallback
-                var totalPrecipitation = farm.ClimateData.GetTotalPrecipitationForYear(viewItem.Year);
+                var totalPrecipitation = climateData.GetTotalPrecipitationForYear(viewItem.Year);
                 var totalIrrigation = viewItem.AmountOfIrrigation;
 
                 result = totalPrecipitation + totalIrrigation;
