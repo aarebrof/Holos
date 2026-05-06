@@ -481,7 +481,7 @@ namespace H.Core.Calculators.Nitrogen
                     manureApplication = new ManureApplicationViewItem() {DateOfApplication = new DateTime(year, 10, 1)};
                 }
 
-                var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplication.DateOfApplication);
+                var averageDailyTemperature = farm.GetPreferredClimateData(cropViewItem).GetMeanTemperatureForDay(manureApplication.DateOfApplication);
                 var adjustedAmmoniaEmissionFactor = this.CalculateAdjustedAmmoniaEmissionFactor(cropViewItem, manureApplication, averageDailyTemperature);
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {
@@ -512,7 +512,7 @@ namespace H.Core.Calculators.Nitrogen
                     manureApplication = new ManureApplicationViewItem() { DateOfApplication = new DateTime(year, 10, 1) };
                 }
 
-                var averageDailyTemperature = farm.ClimateData.GetMeanTemperatureForDay(manureApplication.DateOfApplication);
+                var averageDailyTemperature = farm.GetPreferredClimateData(cropViewItem).GetMeanTemperatureForDay(manureApplication.DateOfApplication);
                 var fractionOfPoultryManureVolatilized = this.GetFractionOfPoultryManureVolatilized(averageDailyTemperature);
                 fieldAreasAndEmissionFactors.Add(new WeightedAverageInput()
                 {

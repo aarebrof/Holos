@@ -313,8 +313,8 @@ namespace H.Core.Services.LandManagement
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ClimateParameter.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.TillageFactor.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.ManagementFactor.ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonPrecipitation(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
-            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.ClimateData.GetGrowingSeasonEvapotranspiration(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.GetPreferredClimateData(viewItem).GetGrowingSeasonPrecipitation(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
+            stringBuilder.Append(String.Format("\"{0}\",", $"{_unitsCalculator.GetUnitsOfMeasurementValue(measurementSystem, MetricUnitsOfMeasurement.MillimetersPerYear, farm.GetPreferredClimateData(viewItem).GetGrowingSeasonEvapotranspiration(viewItem.Year), exportedFromGui).ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.FractionOfLandOccupiedByLowerPortionsOfLandscape.ToString(DefaultDecimalOutputFormat)}"));
             stringBuilder.Append(String.Format("\"{0}\",", $"{viewItem.WeightedModifierBasedOnTexture.ToString(DefaultDecimalOutputFormat)}"));
 

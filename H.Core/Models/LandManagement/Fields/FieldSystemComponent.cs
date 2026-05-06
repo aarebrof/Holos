@@ -13,6 +13,7 @@ using H.Core;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Rotation;
 using H.Core.Providers.Soil;
+using H.Core.Providers.Climate;
 
 #endregion
 
@@ -29,9 +30,14 @@ namespace H.Core.Models.LandManagement.Fields
 
         private bool _beginOrderingAtStartYearOfRotation;
         private bool _useFieldLevelSoilData;
+        private bool _useFieldLevelClimateData;
+
+        private double _latitude;
+        private double _longitude;
 
         private SoilData _soilData;
         private ObservableCollection<SoilData> _soilDataAvailableForField;
+        private ClimateData _climateData;
 
         #endregion
 
@@ -56,6 +62,10 @@ namespace H.Core.Models.LandManagement.Fields
             this.UseFieldLevelSoilData = false;
             this.SoilData = new SoilData();
             this.SoilDataAvailableForField = new ObservableCollection<SoilData>();
+
+            // Use farm climate data by default (instead of field specific climate data)
+            this.UseFieldLevelClimateData = false;
+            this.ClimateData = new ClimateData();
         }
 
         #endregion
@@ -101,6 +111,67 @@ namespace H.Core.Models.LandManagement.Fields
             set
             {
                 SetProperty(ref _soilData, value);
+            }
+        }
+
+        /// <summary>
+        /// By default, <see cref="ClimateData"/> associated with the farm will be used (across all fields). This flag allows for field-specific <see cref="ClimateData"/>
+        /// to be used.
+        /// </summary>
+        public bool UseFieldLevelClimateData
+        {
+            get
+            {
+                return _useFieldLevelClimateData;
+            }
+            set
+            {
+                SetProperty(ref _useFieldLevelClimateData, value);
+            }
+        }
+
+        /// <summary>
+        /// Allow for field specific climate data (as opposed to one set of climate data being used for all fields on the farm)
+        /// </summary>
+        public ClimateData ClimateData
+        {
+            get
+            {
+                return _climateData;
+            }
+            set
+            {
+                SetProperty(ref _climateData, value);
+            }
+        }
+
+        /// <summary>
+        /// The latitude of the field location. Used when <see cref="UseFieldLevelClimateData"/> is enabled to fetch field-specific climate data.
+        /// </summary>
+        public double Latitude
+        {
+            get
+            {
+                return _latitude;
+            }
+            set
+            {
+                SetProperty(ref _latitude, value);
+            }
+        }
+
+        /// <summary>
+        /// The longitude of the field location. Used when <see cref="UseFieldLevelClimateData"/> is enabled to fetch field-specific climate data.
+        /// </summary>
+        public double Longitude
+        {
+            get
+            {
+                return _longitude;
+            }
+            set
+            {
+                SetProperty(ref _longitude, value);
             }
         }
 
