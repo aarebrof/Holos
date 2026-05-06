@@ -1,11 +1,11 @@
 ﻿using H.Core.Enumerations;
 using H.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Calculators.Nitrogen
 {
@@ -166,7 +166,7 @@ namespace H.Core.Calculators.Nitrogen
             {
                 return 0;
             }
-            
+
             var itemsByYear = farm.GetCropDetailViewItemsByYear(viewItem.Year, false);
             var weightedEmissionFactor = CalculateWeightedOrganicNitrogenEmissionFactor(itemsByYear, farm);
 
@@ -199,7 +199,7 @@ namespace H.Core.Calculators.Nitrogen
             {
                 return 0;
             }
-            
+
             // The total volume after all applications and exports have been subtracted
             var totalVolumeRemaining = _manureService.GetTotalVolumeRemainingForFarmAndYear(viewItem.Year, farm);
 
@@ -241,7 +241,7 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateDirectN2ONFromFieldAppliedManure(
             Farm farm,
-            CropViewItem viewItem, 
+            CropViewItem viewItem,
             bool includeRemainingAmounts = true)
         {
             var result = 0d;
@@ -341,8 +341,8 @@ namespace H.Core.Calculators.Nitrogen
         /// Equation 4.6.2-3
         /// </summary>
         public double CalculateAdjustedAmmoniaEmissionFactor(
-            CropViewItem viewItem, 
-            ManureApplicationViewItem manureApplication, 
+            CropViewItem viewItem,
+            ManureApplicationViewItem manureApplication,
             double averageDailyTemperature)
         {
             var emissionFactorForLandApplication = GetEmissionFactorForLandApplication(viewItem, manureApplication);
@@ -360,15 +360,15 @@ namespace H.Core.Calculators.Nitrogen
         /// (kg NH3-N)
         /// </summary>
         public double CalculateNH3NLossFromLandAppliedManure(
-            Farm farm, 
+            Farm farm,
             CropViewItem viewItem,
             ManureApplicationViewItem manureApplicationViewItem)
         {
             var result = 0d;
 
-            if (manureApplicationViewItem.IsImportedManure()) 
+            if (manureApplicationViewItem.IsImportedManure())
             {
-                var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem);
+                var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem, viewItem);
                 var nitrogenUsed = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
                 result = nitrogenUsed * landApplicationFactors.VolatilizationFraction;
@@ -386,7 +386,7 @@ namespace H.Core.Calculators.Nitrogen
             }
             else if (animalType.IsSheepType() || animalType.IsSwineType() || animalType.IsOtherAnimalType())
             {
-                var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem);
+                var landApplicationFactors = this.GetLandApplicationFactors(farm, manureApplicationViewItem, viewItem);
                 var nitrogenUsed = manureApplicationViewItem.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
                 // Equation 4.6.2-12
@@ -395,7 +395,7 @@ namespace H.Core.Calculators.Nitrogen
             else
             {
                 var tanUsed = _manureService.GetAmountOfTanUsedDuringLandApplication(viewItem, manureApplicationViewItem);
-                var temperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
+                var temperature = farm.GetPreferredClimateData(viewItem).GetMeanTemperatureForDay(manureApplicationViewItem.DateOfApplication);
                 var fractionVolatilized = this.GetFractionOfPoultryManureVolatilized(temperature);
 
                 result = fractionVolatilized * tanUsed;
@@ -426,7 +426,7 @@ namespace H.Core.Calculators.Nitrogen
                 emissionFraction = 0.25;
             }
 
-            result =  emissionFraction;
+            result = emissionFraction;
 
             return result;
         }
@@ -478,7 +478,7 @@ namespace H.Core.Calculators.Nitrogen
                 var manureApplication = cropViewItem.ManureApplicationViewItems.FirstOrDefault();
                 if (manureApplication == null)
                 {
-                    manureApplication = new ManureApplicationViewItem() {DateOfApplication = new DateTime(year, 10, 1)};
+                    manureApplication = new ManureApplicationViewItem() { DateOfApplication = new DateTime(year, 10, 1) };
                 }
 
                 var averageDailyTemperature = farm.GetPreferredClimateData(cropViewItem).GetMeanTemperatureForDay(manureApplication.DateOfApplication);
@@ -545,7 +545,7 @@ namespace H.Core.Calculators.Nitrogen
                     animalType: animalType);
 
                 var tanUsedByAnimalType = tanUsedByAnimalTypes.Where(x => x.Item2 == animalType);
-                var tanUsed =  tanUsedByAnimalType.Sum(x => x.Item1);
+                var tanUsed = tanUsedByAnimalType.Sum(x => x.Item1);
                 var tanExportedByType = _manureService.GetTotalTANExportedByAnimalType(animalType, farm, year);
 
                 var result = totalTanCreatedByAnimalType - tanUsed - tanExportedByType;
@@ -962,8 +962,8 @@ namespace H.Core.Calculators.Nitrogen
             return result;
         }
 
-        public double CalculateNH3NLossFromExportedManure(Farm farm, 
-            CropViewItem viewItem, 
+        public double CalculateNH3NLossFromExportedManure(Farm farm,
+            CropViewItem viewItem,
             ManureExportViewItem manureExportViewItem)
         {
             var result = 0d;
@@ -983,7 +983,7 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             var ammoniaEmissionsFromLandAppliedManure = this.CalculateNH3NLossFromFarmSourcedLandAppliedManureForField(farm, cropViewItem, year);
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
 
             var result = ammoniaEmissionsFromLandAppliedManure * emissionFactorForVolatilization;
 
@@ -1001,7 +1001,7 @@ namespace H.Core.Calculators.Nitrogen
                 return 0;
             }
 
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
             var leftOverAmmonia = this.CalculateNH3NEmissionsFromLeftOverManureForField(cropViewItem, year, farm);
 
             var result = leftOverAmmonia * emissionFactorForVolatilization;
@@ -1018,7 +1018,7 @@ namespace H.Core.Calculators.Nitrogen
             Farm farm,
             int year)
         {
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, null, year);
             var exportedAmmonia = this.CalculateAmmoniaEmissionsFromExportedManureForFarmAndYear(farm, year).Sum(x => x.Value);
 
             var result = exportedAmmonia * emissionFactorForVolatilization;
@@ -1036,7 +1036,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var result = 0d;
 
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, viewItem, year);
             var exportedAmmonia = this.CalculateAmmoniaEmissionsFromVolatilizationOfImportedManureForField(farm, viewItem, year).Sum(x => x.Value);
 
             result = emissionFactorForVolatilization * exportedAmmonia;
@@ -1070,7 +1070,7 @@ namespace H.Core.Calculators.Nitrogen
         public double CalculateTotalManureN2ONVolatilizationForField(
             CropViewItem cropViewItem,
             Farm farm,
-            int year, 
+            int year,
             bool includeRemainingAmounts = true)
         {
             if (cropViewItem.CropType.IsNativeGrassland())
@@ -1083,7 +1083,7 @@ namespace H.Core.Calculators.Nitrogen
             var volatilizationFromApplications = this.CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedManureForField(year, farm, cropViewItem);
             var volatilizationFromLeftOverManure = this.CalculateN2ONFromVolatilizationOfLeftOverManureForField(year, farm, cropViewItem);
             var ammoniaFromImportedManure = this.CalculateAmmoniaEmissionsFromVolatilizationOfImportedManureForField(farm, cropViewItem, year).Sum(x => x.Value);
-            var volatilizationFromImportedManure = ammoniaFromImportedManure * this.GetEmissionFactorForVolatilization(farm, year);
+            var volatilizationFromImportedManure = ammoniaFromImportedManure * this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
 
             result = volatilizationFromApplications + volatilizationFromImportedManure;
 
@@ -1229,7 +1229,7 @@ namespace H.Core.Calculators.Nitrogen
             int year)
         {
             var field = farm.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
-            if (field == null )
+            if (field == null)
             {
                 return 0;
             }
@@ -1283,7 +1283,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
             var nitrogenUsed = manureItemBase.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
 
             var result = nitrogenUsed * leachingFraction * leachingEmissionFactorForLandApplication;
 
@@ -1334,7 +1334,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var manureNitrogenRemaining = GetManureNitrogenRemainingForField(viewItem, farm);
 
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
             var result = manureNitrogenRemaining * leachingFraction * leachingEmissionFactorForLandApplication;
@@ -1387,8 +1387,8 @@ namespace H.Core.Calculators.Nitrogen
         {
             var totalNitrogen = manureItemBase.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
 
-            var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff; 
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
 
             var result = totalNitrogen * leachingFraction * (1 - leachingEmissionFactorForLandApplication);
 
@@ -1431,7 +1431,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var totalNitrogenRemainingForField = this.GetManureNitrogenRemainingForField(viewItem, farm);
 
-            var result = this.CalculateTotalNitrateLeachingEmissions(farm, totalNitrogenRemainingForField, viewItem.Year);
+            var result = this.CalculateTotalNitrateLeachingEmissions(farm, totalNitrogenRemainingForField, viewItem);
 
             return result;
         }
@@ -1563,13 +1563,13 @@ namespace H.Core.Calculators.Nitrogen
 
         private double GetVolatilizationFractionForLandApplication(AnimalType animalType, Province province, int year)
         {
-return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizationFractionForLandApplication(animalType, province, year);
+            return this.LivestockEmissionConversionFactorsProvider.GetVolatilizationFractionForLandApplication(animalType, province, year);
         }
 
-        private double GetEmissionFactorForVolatilization(Farm farm, int year)
+        private double GetEmissionFactorForVolatilization(Farm farm, CropViewItem viewItem, int year)
         {
-            var precipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, year);
-            var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, year);
+            var precipitation = farm.GetAnnualPrecipitation(viewItem, year); // Seems like the year here may differ from cropViewItem, so pass in year explicitly
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(viewItem, year); // Seems like the year here may differ from cropViewItem, so pass in year explicitly
             var emissionFactorForVolatilization = this.LivestockEmissionConversionFactorsProvider.GetEmissionFactorForVolatilizationBasedOnClimate(precipitation, evapotranspiration);
 
             return emissionFactorForVolatilization;
@@ -1583,16 +1583,16 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             var manureStateType = manureApplicationViewItem.ManureStateType;
             var manureApplicationMethod = manureApplicationViewItem.ManureApplicationMethod;
 
-            
+
             return !manureStateType.IsLiquidManure() ? this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForSolidAppliedManure(tillageType) : this.AnimalAmmoniaEmissionFactorProvider.GetAmmoniaEmissionFactorForLiquidAppliedManure(manureApplicationMethod);
         }
 
         private IEmissionData GetLandApplicationFactors(
             Farm farm,
-            ManureApplicationViewItem manureApplicationViewItem)
+            ManureApplicationViewItem manureApplicationViewItem, CropViewItem cropViewItem)
         {
-            var annualPrecipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, manureApplicationViewItem.DateOfApplication);
-            var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, manureApplicationViewItem.DateOfApplication);
+            var annualPrecipitation = farm.GetAnnualPrecipitation(cropViewItem, manureApplicationViewItem.DateOfApplication.Year); // manureApplicationViewItem year may differ from cropViewItem year?
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(cropViewItem, manureApplicationViewItem.DateOfApplication.Year);  // manureApplicationViewItem year may differ from cropViewItem year?
             var animalType = manureApplicationViewItem.AnimalType;
             var year = manureApplicationViewItem.DateOfApplication.Year;
 
@@ -1606,8 +1606,8 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             AnimalType animalType,
             int year)
         {
-            var annualPrecipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, year);
-            var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, year);
+            var annualPrecipitation = farm.GetAnnualPrecipitation(year);
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(year);
 
             var landApplicationFactors = this.LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, animalType, year);
 
@@ -1619,8 +1619,8 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             AnimalType animalType,
             DateTime dateTime)
         {
-            var annualPrecipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, dateTime);
-            var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, dateTime);
+            var annualPrecipitation = farm.GetAnnualPrecipitation(dateTime.Year);
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(dateTime.Year);
 
             var landApplicationFactors = this.LivestockEmissionConversionFactorsProvider.GetLandApplicationFactors(farm, annualPrecipitation, evapotranspiration, animalType, dateTime.Year);
 
@@ -1631,8 +1631,8 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             Farm farm,
             ManureExportViewItem manureExportViewItem)
         {
-            var annualPrecipitation = this.ClimateProvider.GetAnnualPrecipitation(farm, manureExportViewItem.DateOfExport);
-            var evapotranspiration = this.ClimateProvider.GetAnnualEvapotranspiration(farm, manureExportViewItem.DateOfExport);
+            var annualPrecipitation = farm.GetAnnualPrecipitation(manureExportViewItem.DateOfExport.Year);
+            var evapotranspiration = farm.GetAnnualEvapotranspiration(manureExportViewItem.DateOfExport.Year);
             var animalType = manureExportViewItem.AnimalType;
             var year = manureExportViewItem.DateOfExport.Year;
 
@@ -1642,11 +1642,11 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
         }
 
         private double GetAdjustedAmmoniaEmissionFactor(
-            Farm farm, 
+            Farm farm,
             CropViewItem cropViewItem,
             ManureApplicationViewItem manureApplicationViewItem)
         {
-            var averageDailyTemperature = this.ClimateProvider.GetMeanTemperatureForDay(farm, manureApplicationViewItem.DateOfApplication);
+            var averageDailyTemperature = farm.GetPreferredClimateData(cropViewItem).GetMeanTemperatureForDay(manureApplicationViewItem.DateOfApplication);
             var adjustedAmmoniaEmissionFactor = CalculateAdjustedAmmoniaEmissionFactor(cropViewItem, manureApplicationViewItem, averageDailyTemperature);
 
             return adjustedAmmoniaEmissionFactor;
@@ -1654,8 +1654,17 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
 
         private double GetLeachingFraction(Farm farm, int year)
         {
-            var growingSeasonPrecipitation = this.ClimateProvider.GetGrowingSeasonPrecipitation(farm, year);
-            var growingSeasonEvapotranspiration = this.ClimateProvider.GetGrowingSeasonEvapotranspiration(farm, year);
+            var growingSeasonPrecipitation = farm.GetGrowingSeasonPrecipitation(year);
+            var growingSeasonEvapotranspiration = farm.GetGrowingSeasonEvapotranspiration(year);
+            var leachingFraction = this.CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
+
+            return leachingFraction;
+        }
+
+        private double GetLeachingFraction(Farm farm, CropViewItem viewItem)
+        {
+            var growingSeasonPrecipitation = farm.GetGrowingSeasonPrecipitation(viewItem);
+            var growingSeasonEvapotranspiration = farm.GetGrowingSeasonEvapotranspiration(viewItem);
             var leachingFraction = this.CalculateLeachingFraction(growingSeasonPrecipitation, growingSeasonEvapotranspiration);
 
             return leachingFraction;
@@ -1680,7 +1689,19 @@ return            this.LivestockEmissionConversionFactorsProvider.GetVolatilizat
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
             var leachingFraction = this.GetLeachingFraction(farm, year);
 
-            result = amountOfNitrogen * leachingFraction* (1 - leachingEmissionFactorForLandApplication);
+            result = amountOfNitrogen * leachingFraction * (1 - leachingEmissionFactorForLandApplication);
+
+            return result;
+        }
+
+        private double CalculateTotalNitrateLeachingEmissions(Farm farm, double amountOfNitrogen, CropViewItem viewItem)
+        {
+            var result = 0d;
+
+            var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
+
+            result = amountOfNitrogen * leachingFraction * (1 - leachingEmissionFactorForLandApplication);
 
             return result;
         }

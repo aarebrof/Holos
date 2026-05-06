@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using H.Core.Emissions.Results;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Services.Animals;
+using System.Linq;
 
 namespace H.Core.Calculators.Nitrogen
 {
@@ -176,7 +171,7 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateDirectN2ONFromFieldAppliedDigestate(
             Farm farm,
-            CropViewItem viewItem, 
+            CropViewItem viewItem,
             bool includeRemainingAmounts)
         {
             var result = 0d;
@@ -264,7 +259,7 @@ namespace H.Core.Calculators.Nitrogen
             }
 
             var ammoniaEmissionsFromLandAppliedManure = this.CalculateNH3NLossFromFarmSourcedLandAppliedDigestateForField(farm, cropViewItem, year);
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
 
             var result = ammoniaEmissionsFromLandAppliedManure * emissionFactorForVolatilization;
 
@@ -276,7 +271,7 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateN2OFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(int year, Farm farm, CropViewItem cropViewItem)
         {
-            var ammoniaEmissionsFromLandAppliedManure = CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(year, farm, cropViewItem); var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var ammoniaEmissionsFromLandAppliedManure = CalculateN2ONFromVolatilizationOfFarmSourcedLandAppliedDigestateForField(year, farm, cropViewItem); var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
 
             var result = CoreConstants.ConvertToN2O((ammoniaEmissionsFromLandAppliedManure));
 
@@ -288,7 +283,7 @@ namespace H.Core.Calculators.Nitrogen
         /// </summary>
         public double CalculateN2ONFromVolatilizationOfLeftOverDigestateForField(int year, Farm farm, CropViewItem cropViewItem)
         {
-            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, year);
+            var emissionFactorForVolatilization = this.GetEmissionFactorForVolatilization(farm, cropViewItem, year);
             var leftOverAmmonia = this.CalculateNH3NEmissionsFromLeftOverDigestateForField(cropViewItem, year, farm);
 
             var result = leftOverAmmonia * emissionFactorForVolatilization;
@@ -304,7 +299,7 @@ namespace H.Core.Calculators.Nitrogen
         public double CalculateTotalDigestateN2ONVolatilizationForField(
             CropViewItem cropViewItem,
             Farm farm,
-            int year, 
+            int year,
             bool includeRemainingAmounts)
         {
             if (cropViewItem.CropType.IsNativeGrassland())
@@ -444,7 +439,7 @@ namespace H.Core.Calculators.Nitrogen
         {
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
             var nitrogenUsed = manureItemBase.AmountOfNitrogenAppliedPerHectare * viewItem.Area;
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
 
             var result = nitrogenUsed * leachingFraction * leachingEmissionFactorForLandApplication;
 
@@ -500,7 +495,7 @@ namespace H.Core.Calculators.Nitrogen
 
             var digestateNitrogenRemainingForField = GetDigestateNitrogenRemainingForField(viewItem, farm);
 
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
 
             var result = digestateNitrogenRemainingForField * leachingFraction * leachingEmissionFactorForLandApplication;
@@ -545,7 +540,7 @@ namespace H.Core.Calculators.Nitrogen
             var totalNitrogenRemainingForField = this.GetDigestateNitrogenRemainingForField(viewItem, farm);
 
             var leachingEmissionFactorForLandApplication = farm.Defaults.EmissionFactorForLeachingAndRunoff;
-            var leachingFraction = this.GetLeachingFraction(farm, viewItem.Year);
+            var leachingFraction = this.GetLeachingFraction(farm, viewItem);
 
             var result = totalNitrogenRemainingForField * leachingFraction * (1 - leachingEmissionFactorForLandApplication);
 
@@ -575,7 +570,7 @@ namespace H.Core.Calculators.Nitrogen
             var leachingFromApplications = this.CalculateTotalDigestateNitrateLeached(farm, cropViewItem);
             var leachingFromRemaining = CalculateTotalNitrateLeachedFromLeftOverDigestateForField(farm, cropViewItem);
 
-            result = leachingFromApplications + leachingFromRemaining; 
+            result = leachingFromApplications + leachingFromRemaining;
 
             return result;
         }

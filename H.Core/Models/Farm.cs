@@ -529,7 +529,7 @@ namespace H.Core.Models
         /// <summary>
         /// Climate data for the farm
         /// </summary>
-        public ClimateData ClimateData
+        protected internal ClimateData ClimateData
         {
             get { return _climateData; }
             set { SetProperty(ref _climateData, value); }
@@ -929,9 +929,9 @@ namespace H.Core.Models
             return this.ClimateData.GetTotalPrecipitationForYear(year);
         }
 
-        public double GetAnnualPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
+        public double GetAnnualPrecipitation(CropViewItem viewItem, int? year = null)
         {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalPrecipitationForYear(year);
+            return this.GetPreferredClimateData(viewItem).GetTotalPrecipitationForYear(year ?? viewItem.Year);
         }
 
         public double GetAnnualEvapotranspiration(int year)
@@ -939,9 +939,9 @@ namespace H.Core.Models
             return this.ClimateData.GetTotalEvapotranspirationForYear(year);
         }
 
-        public double GetAnnualEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
+        public double GetAnnualEvapotranspiration(CropViewItem viewItem, int? year = null)
         {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalEvapotranspirationForYear(year);
+            return this.GetPreferredClimateData(viewItem).GetTotalEvapotranspirationForYear(year ?? viewItem.Year);
         }
 
         public double GetGrowingSeasonPrecipitation(int year)
@@ -949,9 +949,9 @@ namespace H.Core.Models
             return this.ClimateData.GetGrowingSeasonPrecipitation(year);
         }
 
-        public double GetGrowingSeasonPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
+        public double GetGrowingSeasonPrecipitation(CropViewItem viewItem)
         {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonPrecipitation(year);
+            return this.GetPreferredClimateData(viewItem).GetGrowingSeasonPrecipitation(viewItem.Year);
         }
 
         public double GetGrowingSeasonEvapotranspiration(int year)
@@ -959,9 +959,9 @@ namespace H.Core.Models
             return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
         }
 
-        public double GetGrowingSeasonEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
+        public double GetGrowingSeasonEvapotranspiration(CropViewItem viewItem)
         {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonEvapotranspiration(year);
+            return this.GetPreferredClimateData(viewItem).GetGrowingSeasonEvapotranspiration(viewItem.Year);
         }
 
         /// <summary>
@@ -1179,11 +1179,13 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Returns field-level climate data if the field has <see cref="FieldSystemComponent.UseFieldLevelClimateData"/> enabled and has
-        /// daily climate data available, otherwise returns the farm-level <see cref="ClimateData"/>.
+        /// Returns field-level climate data if the field associated with the <see cref="CropViewItem"/> has field-level climate enabled,
+        /// otherwise returns the farm-level <see cref="ClimateData"/>.
         /// </summary>
-        public ClimateData GetPreferredClimateData(FieldSystemComponent fieldSystemComponent)
+        public ClimateData GetPreferredClimateData(CropViewItem cropViewItem)
         {
+            var fieldSystemComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+
             if (fieldSystemComponent == null)
             {
                 return this.ClimateData;
@@ -1195,17 +1197,6 @@ namespace H.Core.Models
             }
 
             return this.ClimateData;
-        }
-
-        /// <summary>
-        /// Returns field-level climate data if the field associated with the <see cref="CropViewItem"/> has field-level climate enabled,
-        /// otherwise returns the farm-level <see cref="ClimateData"/>.
-        /// </summary>
-        public ClimateData GetPreferredClimateData(CropViewItem cropViewItem)
-        {
-            var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
-
-            return this.GetPreferredClimateData(fieldComponent);
         }
 
         public List<CropViewItem> GetAllCropViewItems()

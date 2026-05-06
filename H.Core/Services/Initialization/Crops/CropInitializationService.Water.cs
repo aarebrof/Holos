@@ -1,9 +1,7 @@
-﻿using H.Core.Models.LandManagement.Fields;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Services.LandManagement;
-using H.Core.Enumerations;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Carbon;
-using System.Linq;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -32,7 +30,7 @@ namespace H.Core.Services.Initialization.Crops
         public void InitializeIrrigationWaterApplication(Farm farm, CropViewItem viewItem)
         {
             viewItem.GrowingSeasonIrrigation = _irrigationService.GetGrowingSeasonIrrigation(farm, viewItem);
-            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem.Year);
+            viewItem.AmountOfIrrigation = _irrigationService.GetDefaultIrrigationForYear(farm, viewItem);
         }
 
         /// <summary>

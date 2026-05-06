@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Media;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
 using H.Core.Providers.Irrigation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Services.LandManagement
 {
@@ -15,7 +13,7 @@ namespace H.Core.Services.LandManagement
         #region Fields
 
         private readonly Table_4_Monthly_Irrigation_Water_Application_Provider _irrigationProvider = new Table_4_Monthly_Irrigation_Water_Application_Provider();
-        
+
 
         #endregion
 
@@ -29,10 +27,10 @@ namespace H.Core.Services.LandManagement
         /// <summary>
         /// Equation 2.1.1-17
         /// </summary>
-        public double GetDefaultIrrigationForYear(Farm farm, int year)
+        public double GetDefaultIrrigationForYear(Farm farm, CropViewItem viewItem)
         {
-            var annualPrecipitation = farm.ClimateData.GetTotalPrecipitationForYear(year);
-            var potentialEvapotranspiration = farm.ClimateData.GetTotalEvapotranspirationForYear(year);
+            var annualPrecipitation = farm.GetPreferredClimateData(viewItem).GetTotalPrecipitationForYear(viewItem.Year);
+            var potentialEvapotranspiration = farm.GetPreferredClimateData(viewItem).GetTotalEvapotranspirationForYear(viewItem.Year);
 
             if (potentialEvapotranspiration > annualPrecipitation)
             {
@@ -98,7 +96,7 @@ namespace H.Core.Services.LandManagement
             // Lookup value will be null for January, February, March, November, and December
 
             var fraction = irrigationPercentage / 100.0;
-            double daysInMonth = DateTime.DaysInMonth(year, (int) month);
+            double daysInMonth = DateTime.DaysInMonth(year, (int)month);
 
             var result = precipitation + ((annualIrrigation * fraction) / daysInMonth);
 
@@ -121,13 +119,13 @@ namespace H.Core.Services.LandManagement
             var fraction = irrigationPercentage / 100.0;
             double daysInMonth = DateTime.DaysInMonth(year, (int)month);
 
-            var result =  ((annualIrrigation * fraction) / daysInMonth);
+            var result = ((annualIrrigation * fraction) / daysInMonth);
 
             return result;
         }
 
         public List<double> AddIrrigationToDailyPrecipitations(
-            List<double> dailyPrecipitationList, 
+            List<double> dailyPrecipitationList,
             Farm farm,
             CropViewItem cropViewItem)
         {
@@ -138,10 +136,10 @@ namespace H.Core.Services.LandManagement
             foreach (var dailyPrecipitation in dailyPrecipitationList)
             {
                 var dailyPrecipitationAndIrrigation = this.GetTotalDailyPrecipitation(
-                    julianDay, 
+                    julianDay,
                     dailyPrecipitation,
-                    farm.Province, 
-                    cropViewItem.Year, 
+                    farm.Province,
+                    cropViewItem.Year,
                     cropViewItem.AmountOfIrrigation);
 
                 result.Add(dailyPrecipitationAndIrrigation);

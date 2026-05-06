@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -9,7 +6,9 @@ using H.Core.Providers.Economics;
 using H.Core.Providers.Fertilizer;
 using H.Core.Providers.Soil;
 using H.Core.Services.Initialization.Crops;
-using static H.Core.Services.LandManagement.FieldResultsService;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Services
 {
@@ -27,7 +26,7 @@ namespace H.Core.Services
         private readonly IMapper _digestateViewItemMapper;
         private readonly IMapper _soilDataMapper;
 
-        ICropInitializationService _cropInitializationService;
+        private ICropInitializationService _cropInitializationService;
 
         #endregion
 
@@ -98,7 +97,7 @@ namespace H.Core.Services
                 x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
             });
-            
+
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
 
             var soilDataMapper = new MapperConfiguration(x =>

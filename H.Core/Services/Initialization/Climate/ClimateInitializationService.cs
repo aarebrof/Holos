@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Windows.Documents;
-using H.Core.Calculators.Climate;
+﻿using H.Core.Calculators.Climate;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Climate;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace H.Core.Services.Initialization.Climate
 {
@@ -84,24 +83,16 @@ namespace H.Core.Services.Initialization.Climate
         /// </summary>
         public void InitializeFieldLevelClimate(Farm farm, FieldSystemComponent fieldSystemComponent)
         {
-            if (fieldSystemComponent == null || fieldSystemComponent.UseFieldLevelClimateData == false)
+            if (fieldSystemComponent == null ||
+                !fieldSystemComponent.UseFieldLevelClimateData ||
+                (fieldSystemComponent.Latitude == 0 && fieldSystemComponent.Longitude == 0) ||  // use farm climate data if field location is not set
+                (fieldSystemComponent.Latitude == farm.Latitude && fieldSystemComponent.Longitude == farm.Longitude)) // skip NASA API calls if farm and field location is the same
             {
-                return;
-            }
-
-            if (fieldSystemComponent.Latitude == 0 && fieldSystemComponent.Longitude == 0)
-            {
-                return;
-            }
-
-            // Skip NASA call if field coordinates match the farm coordinates
-            if (fieldSystemComponent.Latitude == farm.Latitude && fieldSystemComponent.Longitude == farm.Longitude)
-            {
-                fieldSystemComponent.ClimateData = farm.ClimateData;
                 return;
             }
 
             var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(fieldSystemComponent.Latitude, fieldSystemComponent.Longitude);
+
             if (dailyClimateData.Any())
             {
                 fieldSystemComponent.ClimateData = new ClimateData(dailyClimateData);

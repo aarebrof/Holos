@@ -1,22 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Threading;
-using System.Xaml;
-using CsvHelper;
-using H.Core.Calculators.Climate;
+﻿using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.LandManagement.Shelterbelt;
-using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;
 using H.Core.Tools;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace H.Core.Providers.Climate
 {
@@ -65,7 +56,7 @@ namespace H.Core.Providers.Climate
         public ClimateData Get(int polygonId, TimeFrame timeFrame, Farm farm)
         {
             var climateData = _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
-            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);    
+            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
 
             return climateData;
         }
@@ -136,52 +127,6 @@ namespace H.Core.Providers.Climate
             return result;
         }
 
-        public double GetMeanTemperatureForDay(Farm farm, DateTime dateTime)
-        {
-            return farm.ClimateData.GetMeanTemperatureForDay(dateTime);
-        }
-
-        public double GetAnnualPrecipitation(Farm farm, DateTime dateTime)
-        {
-            return this.GetAnnualPrecipitation(farm, dateTime.Year);
-        }
-
-
-        public double GetAnnualPrecipitation(Farm farm, int year)
-        {
-            return farm.GetAnnualPrecipitation(year);
-        }
-
-        public double GetGrowingSeasonPrecipitation(Farm farm, DateTime dateTime)
-        {
-            return farm.GetGrowingSeasonPrecipitation(dateTime.Year);
-        }
-
-        public double GetGrowingSeasonPrecipitation(Farm farm, int year)
-        {
-            return farm.GetGrowingSeasonPrecipitation(year);
-        }
-
-        public double GetGrowingSeasonEvapotranspiration(Farm farm, DateTime dateTime)
-        {
-            return this.GetGrowingSeasonEvapotranspiration(farm, dateTime.Year);
-        }
-
-        public double GetGrowingSeasonEvapotranspiration(Farm farm, int year)
-        {
-            return farm.GetGrowingSeasonEvapotranspiration(year);
-        }
-
-        public double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime)
-        {
-            return this.GetAnnualEvapotranspiration(farm, dateTime.Year);
-        }
-
-        public double GetAnnualEvapotranspiration(Farm farm, int year)
-        {
-            return farm.GetAnnualEvapotranspiration(year);
-        }
-
         public ClimateData GetClimateData(int polygonId, TimeFrame timeFrame)
         {
             // Cache here since climate normal calculations are expensive
@@ -243,7 +188,7 @@ namespace H.Core.Providers.Climate
                 {
                     for (int j = 0; j < 12; j++)
                     {
-                        var month = (Months) (j + 1);
+                        var month = (Months)(j + 1);
 
                         var precipitation = farm.ClimateData.GetTotalPrecipitationForMonthAndYear(year, month);
                         var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(year, month);
