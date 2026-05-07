@@ -1184,6 +1184,16 @@ namespace H.Core.Models
         /// </summary>
         public ClimateData GetPreferredClimateData(FieldSystemComponent fieldSystemComponent)
         {
+<<<<<<< HEAD
+=======
+            if (cropViewItem == null)
+            {
+                return this.ClimateData;
+            }
+
+            var fieldSystemComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+
+>>>>>>> df0066a5 (Fix null errors and unit tests failing because of modifier)
             if (fieldSystemComponent == null)
             {
                 return this.ClimateData;
