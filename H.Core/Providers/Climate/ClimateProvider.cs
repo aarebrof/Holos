@@ -133,9 +133,9 @@ namespace H.Core.Providers.Climate
             return farm.GetPreferredClimateData(viewItem).GetMeanTemperatureForDay(dateTime);
         }
 
-        public double GetMeanPrecipitationForDay(Farm farm, DateTime dateTime)
+        public double GetMeanPrecipitationForDay(Farm farm, CropViewItem viewItem, DateTime dateTime)
         {
-            return farm.ClimateData.GetMeanPrecipitationForDay(dateTime);
+            return farm.GetPreferredClimateData(viewItem).GetMeanPrecipitationForDay(dateTime);
         }
 
         public double GetAnnualPrecipitation(Farm farm, DateTime dateTime)

@@ -406,7 +406,7 @@ namespace H.Core.Calculators.Nitrogen
                 // original source: Brentrup et al. 2000, Table 5).
                 // T is the mean daily temperature on the day rain occurs (i.e., the day after application).
                 var dayAfterApplication = applicationDate.AddDays(1);
-                var precipitationDayAfter = this.ClimateProvider.GetMeanPrecipitationForDay(farm, dayAfterApplication);
+                var precipitationDayAfter = this.ClimateProvider.GetMeanPrecipitationForDay(farm, viewItem, dayAfterApplication);
                 if (precipitationDayAfter > 0)
                 {
                     var temperatureDayAfter = this.ClimateProvider.GetMeanTemperatureForDay(farm, viewItem, dayAfterApplication);

@@ -9,7 +9,7 @@ namespace H.Core.Providers.Climate
     {
         void OutputDailyClimateData(Farm farm, string outputPath);
         double GetMeanTemperatureForDay(Farm farm, CropViewItem viewItem, DateTime dateTime);
-        double GetMeanPrecipitationForDay(Farm farm, DateTime dateTime);
+        double GetMeanPrecipitationForDay(Farm farm, CropViewItem viewItem, DateTime dateTime);
         double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime);
         double GetAnnualPrecipitation(Farm farm, DateTime dateTime);
         double GetAnnualPrecipitation(Farm farm, CropViewItem viewItem);
