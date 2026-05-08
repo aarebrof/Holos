@@ -1160,33 +1160,21 @@ namespace H.Core.Models
         }
 
         /// <summary>
-        /// Returns field-level climate data if the field has <see cref="FieldSystemComponent.UseFieldLevelClimateData"/> enabled and has
-        /// daily climate data available, otherwise returns the farm-level <see cref="ClimateData"/>.
-        /// </summary>
-        public ClimateData GetPreferredClimateData(FieldSystemComponent fieldSystemComponent)
-        {
-            if (fieldSystemComponent == null)
-            {
-                return this.ClimateData;
-            }
-
-            if (fieldSystemComponent.UseFieldLevelClimateData && fieldSystemComponent.ClimateData != null && fieldSystemComponent.ClimateData.DailyClimateData.Any())
-            {
-                return fieldSystemComponent.ClimateData;
-            }
-
-            return this.ClimateData;
-        }
-
-        /// <summary>
         /// Returns field-level climate data if the field associated with the <see cref="CropViewItem"/> has field-level climate enabled,
         /// otherwise returns the farm-level <see cref="ClimateData"/>.
         /// </summary>
         public ClimateData GetPreferredClimateData(CropViewItem cropViewItem)
         {
-            var fieldComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
+            if (cropViewItem == null &&
+                this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid) is FieldSystemComponent fieldSystemComponent &&
+                fieldSystemComponent.UseFieldLevelClimateData &&
+                fieldSystemComponent.ClimateData != null &&
+                fieldSystemComponent.ClimateData.DailyClimateData.Count > 0)
+            {
+                return fieldSystemComponent.ClimateData;
+            }
 
-            return this.GetPreferredClimateData(fieldComponent);
+            return this.ClimateData;
         }
 
         public List<CropViewItem> GetAllCropViewItems()
