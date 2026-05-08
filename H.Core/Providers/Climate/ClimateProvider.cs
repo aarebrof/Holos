@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Resources;
-using System.Threading;
-using System.Xaml;
-using CsvHelper;
-using H.Core.Calculators.Climate;
+﻿using H.Core.Calculators.Climate;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.LandManagement.Shelterbelt;
-using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Tools;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 
 namespace H.Core.Providers.Climate
 {
@@ -65,7 +57,7 @@ namespace H.Core.Providers.Climate
         public ClimateData Get(int polygonId, TimeFrame timeFrame, Farm farm)
         {
             var climateData = _slcClimateDataProvider.GetClimateData(polygonId, timeFrame);
-            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);    
+            climateData.BarnTemperatureData = _indoorTemperatureProvider.GetIndoorTemperature(farm.Province);
 
             return climateData;
         }
@@ -136,9 +128,9 @@ namespace H.Core.Providers.Climate
             return result;
         }
 
-        public double GetMeanTemperatureForDay(Farm farm, DateTime dateTime)
+        public double GetMeanTemperatureForDay(Farm farm, CropViewItem viewItem, DateTime dateTime)
         {
-            return farm.ClimateData.GetMeanTemperatureForDay(dateTime);
+            return farm.GetPreferredClimateData(viewItem).GetMeanTemperatureForDay(dateTime);
         }
 
         public double GetMeanPrecipitationForDay(Farm farm, DateTime dateTime)
@@ -151,10 +143,14 @@ namespace H.Core.Providers.Climate
             return this.GetAnnualPrecipitation(farm, dateTime.Year);
         }
 
-
         public double GetAnnualPrecipitation(Farm farm, int year)
         {
             return farm.GetAnnualPrecipitation(year);
+        }
+
+        public double GetAnnualPrecipitation(Farm farm, CropViewItem viewItem)
+        {
+            return farm.GetPreferredClimateData(viewItem).GetTotalPrecipitationForYear(viewItem.Year);
         }
 
         public double GetGrowingSeasonPrecipitation(Farm farm, DateTime dateTime)
@@ -167,6 +163,11 @@ namespace H.Core.Providers.Climate
             return farm.GetGrowingSeasonPrecipitation(year);
         }
 
+        public double GetGrowingSeasonPrecipitation(Farm farm, CropViewItem viewItem)
+        {
+            return farm.GetPreferredClimateData(viewItem).GetGrowingSeasonPrecipitation(viewItem.Year);
+        }
+
         public double GetGrowingSeasonEvapotranspiration(Farm farm, DateTime dateTime)
         {
             return this.GetGrowingSeasonEvapotranspiration(farm, dateTime.Year);
@@ -177,6 +178,11 @@ namespace H.Core.Providers.Climate
             return farm.GetGrowingSeasonEvapotranspiration(year);
         }
 
+        public double GetGrowingSeasonEvapotranspiration(Farm farm, CropViewItem viewItem)
+        {
+            return farm.GetPreferredClimateData(viewItem).GetGrowingSeasonEvapotranspiration(viewItem.Year);
+        }
+
         public double GetAnnualEvapotranspiration(Farm farm, DateTime dateTime)
         {
             return this.GetAnnualEvapotranspiration(farm, dateTime.Year);
@@ -185,6 +191,11 @@ namespace H.Core.Providers.Climate
         public double GetAnnualEvapotranspiration(Farm farm, int year)
         {
             return farm.GetAnnualEvapotranspiration(year);
+        }
+
+        public double GetAnnualEvapotranspiration(Farm farm, CropViewItem viewItem)
+        {
+            return farm.GetPreferredClimateData(viewItem).GetTotalEvapotranspirationForYear(viewItem.Year);
         }
 
         public ClimateData GetClimateData(int polygonId, TimeFrame timeFrame)
@@ -248,7 +259,7 @@ namespace H.Core.Providers.Climate
                 {
                     for (int j = 0; j < 12; j++)
                     {
-                        var month = (Months) (j + 1);
+                        var month = (Months)(j + 1);
 
                         var precipitation = farm.ClimateData.GetTotalPrecipitationForMonthAndYear(year, month);
                         var temperature = farm.ClimateData.GetAverageTemperatureForMonthAndYear(year, month);

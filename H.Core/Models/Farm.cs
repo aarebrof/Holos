@@ -929,19 +929,9 @@ namespace H.Core.Models
             return this.ClimateData.GetTotalPrecipitationForYear(year);
         }
 
-        public double GetAnnualPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
-        {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalPrecipitationForYear(year);
-        }
-
         public double GetAnnualEvapotranspiration(int year)
         {
             return this.ClimateData.GetTotalEvapotranspirationForYear(year);
-        }
-
-        public double GetAnnualEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
-        {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetTotalEvapotranspirationForYear(year);
         }
 
         public double GetGrowingSeasonPrecipitation(int year)
@@ -949,20 +939,11 @@ namespace H.Core.Models
             return this.ClimateData.GetGrowingSeasonPrecipitation(year);
         }
 
-        public double GetGrowingSeasonPrecipitation(int year, FieldSystemComponent fieldSystemComponent)
-        {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonPrecipitation(year);
-        }
-
         public double GetGrowingSeasonEvapotranspiration(int year)
         {
             return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
         }
 
-        public double GetGrowingSeasonEvapotranspiration(int year, FieldSystemComponent fieldSystemComponent)
-        {
-            return this.GetPreferredClimateData(fieldSystemComponent).GetGrowingSeasonEvapotranspiration(year);
-        }
 
         /// <summary>
         /// Returns all manure application made on this farm
@@ -1184,16 +1165,6 @@ namespace H.Core.Models
         /// </summary>
         public ClimateData GetPreferredClimateData(FieldSystemComponent fieldSystemComponent)
         {
-<<<<<<< HEAD
-=======
-            if (cropViewItem == null)
-            {
-                return this.ClimateData;
-            }
-
-            var fieldSystemComponent = this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid);
-
->>>>>>> df0066a5 (Fix null errors and unit tests failing because of modifier)
             if (fieldSystemComponent == null)
             {
                 return this.ClimateData;
