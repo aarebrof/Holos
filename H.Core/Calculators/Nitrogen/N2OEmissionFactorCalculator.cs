@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Transactions;
-using H.Core.Calculators.Carbon;
+﻿using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Nitrogen.NitrogenService;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -14,6 +9,9 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Calculators.Nitrogen
 {
@@ -167,8 +165,8 @@ namespace H.Core.Calculators.Nitrogen
 
             var emissionsDueToLandscapeAndTopography = this.CalculateTopographyEmissions(
                 fractionOfLandOccupiedByLowerPortionsOfLandscape: fractionOfLandOccupiedByLowerPortionsOfLandscape,
-                growingSeasonPrecipitation: farm.GetGrowingSeasonPrecipitation(year),
-                growingSeasonEvapotranspiration: farm.GetGrowingSeasonEvapotranspiration(year),
+                growingSeasonPrecipitation: farm.GetPreferredClimateData(viewItem).GetGrowingSeasonPrecipitation(viewItem.Year),
+                growingSeasonEvapotranspiration: farm.GetPreferredClimateData(viewItem).GetGrowingSeasonEvapotranspiration(viewItem.Year),
                 amountOfIrrigation: viewItem == null ? 0.0 : viewItem.AmountOfIrrigation);
 
             var baseEcodistrictFactor = this.CalculateBaseEcodistrictValue(

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Documents;
 using H.Core.Calculators.Climate;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Climate;
 
 namespace H.Core.Services.Initialization.Climate
@@ -74,6 +75,44 @@ namespace H.Core.Services.Initialization.Climate
             farm.ClimateData.EvapotranspirationData = evapotranspirationNormals;
             farm.ClimateData.PrecipitationData = precipitationNormals;
             farm.ClimateData.TemperatureData = temperatureNormals;
+        }
+
+        /// <summary>
+        /// Initializes climate data for a specific field using its own coordinates. If the field has valid coordinates
+        /// and <see cref="FieldSystemComponent.UseFieldLevelClimateData"/> is enabled, climate data will be fetched for
+        /// the field location. Otherwise, farm-level climate data is used.
+        /// </summary>
+        public void InitializeFieldLevelClimate(Farm farm, FieldSystemComponent fieldSystemComponent)
+        {
+            if (fieldSystemComponent == null || fieldSystemComponent.UseFieldLevelClimateData == false)
+            {
+                return;
+            }
+
+            if (fieldSystemComponent.Latitude == 0 && fieldSystemComponent.Longitude == 0)
+            {
+                return;
+            }
+
+            // Skip NASA call if field coordinates match the farm coordinates
+            if (fieldSystemComponent.Latitude == farm.Latitude && fieldSystemComponent.Longitude == farm.Longitude)
+            {
+                fieldSystemComponent.ClimateData = farm.ClimateData;
+                return;
+            }
+
+            var dailyClimateData = _nasaClimateProvider.GetCustomClimateData(fieldSystemComponent.Latitude, fieldSystemComponent.Longitude);
+            if (dailyClimateData.Any())
+            {
+                fieldSystemComponent.ClimateData = new ClimateData(dailyClimateData);
+
+                var startYear = dailyClimateData.Min(x => x.Date.Year);
+                var endYear = dailyClimateData.Max(x => x.Date.Year);
+
+                fieldSystemComponent.ClimateData.TemperatureData = _climateNormalCalculator.GetTemperatureDataByDailyValues(dailyClimateData, startYear, endYear);
+                fieldSystemComponent.ClimateData.PrecipitationData = _climateNormalCalculator.GetPrecipitationDataByDailyValues(dailyClimateData, startYear, endYear);
+                fieldSystemComponent.ClimateData.EvapotranspirationData = _climateNormalCalculator.GetEvapotranspirationDataByDailyValues(dailyClimateData, startYear, endYear);
+            }
         }
 
         #endregion

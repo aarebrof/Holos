@@ -3,15 +3,15 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using H.Core.Providers.Evapotranspiration;
+using H.Core.Providers.Precipitation;
+using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using H.Core.Providers.Evapotranspiration;
-using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;
 using NitrogenFertilizerType = H.Core.Enumerations.NitrogenFertilizerType;
 
 namespace H.Core.Test.Calculators.Nitrogen
@@ -65,15 +65,19 @@ namespace H.Core.Test.Calculators.Nitrogen
                     AnimalType.Beef, AnimalType.Dairy
                 });
 
-            _mockClimateProvider.Setup(x => x.GetMeanTemperatureForDay(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(19);
+            _mockClimateProvider.Setup(x => x.GetMeanTemperatureForDay(It.IsAny<Farm>(), It.IsAny<CropViewItem>(), It.IsAny<DateTime>())).Returns(19);
             _mockClimateProvider.Setup(x => x.GetAnnualPrecipitation(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(12);
-            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(8);
-            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(2);
-            _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(3);
             _mockClimateProvider.Setup(x => x.GetAnnualPrecipitation(It.IsAny<Farm>(), It.IsAny<int>())).Returns(12);
-            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(8);
-            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(2);
+            _mockClimateProvider.Setup(x => x.GetAnnualPrecipitation(It.IsAny<Farm>(), It.IsAny<CropViewItem>())).Returns(12);
             _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<int>())).Returns(3);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(3);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonPrecipitation(It.IsAny<Farm>(), It.IsAny<CropViewItem>())).Returns(3);
+            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(8);
+            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(8);
+            _mockClimateProvider.Setup(x => x.GetAnnualEvapotranspiration(It.IsAny<Farm>(), It.IsAny<CropViewItem>())).Returns(8);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<DateTime>())).Returns(2);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<int>())).Returns(2);
+            _mockClimateProvider.Setup(x => x.GetGrowingSeasonEvapotranspiration(It.IsAny<Farm>(), It.IsAny<CropViewItem>())).Returns(2);
 
             _emissionFactors = new Table_36_Livestock_Emission_Conversion_Factors_Data()
             {
@@ -99,10 +103,10 @@ namespace H.Core.Test.Calculators.Nitrogen
             var field = base.GetTestFieldComponent();
 
             _viewItem.FieldSystemComponentGuid = field.Guid;
-            
+
             field.CropViewItems.Clear();
             field.CropViewItems.Add(_viewItem);
-            
+
             var soilData = base.GetTestSoilData();
             field.SoilData = soilData;
 
@@ -140,21 +144,21 @@ namespace H.Core.Test.Calculators.Nitrogen
             _farm.GeographicData.DefaultSoilData = soilData;
 
             // Simulate dry environment to ensure irrigation has an effect
-            _farm.ClimateData.PrecipitationData = new PrecipitationData() {GrowingSeasonPrecipitation = 100 };
+            _farm.ClimateData.PrecipitationData = new PrecipitationData() { GrowingSeasonPrecipitation = 100 };
             _farm.ClimateData.EvapotranspirationData = new EvapotranspirationData() { GrowingSeasonEvapotranspiration = 200 };
 
-            _viewItem.AmountOfIrrigation =0.0;
+            _viewItem.AmountOfIrrigation = 0.0;
             var noIrr = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
 
-            _viewItem.AmountOfIrrigation =10.0;
+            _viewItem.AmountOfIrrigation = 10.0;
             var withIrr = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
 
-            Assert.AreNotEqual(noIrr, withIrr,1e-12, "Expected different EF when irrigation changes, verifying fresh calculation (new cache key).");
+            Assert.AreNotEqual(noIrr, withIrr, 1e-12, "Expected different EF when irrigation changes, verifying fresh calculation (new cache key).");
 
             // Revert to original irrigation to ensure cached/original value is returned consistently
-            _viewItem.AmountOfIrrigation =0.0;
+            _viewItem.AmountOfIrrigation = 0.0;
             var noIrrAgain = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
-            Assert.AreEqual(noIrr, noIrrAgain,1e-12, "Reverting irrigation should yield the original value (cache hit).");
+            Assert.AreEqual(noIrr, noIrrAgain, 1e-12, "Reverting irrigation should yield the original value (cache hit).");
         }
 
         /// <summary>
@@ -179,7 +183,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var fineVal = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
 
-            Assert.AreNotEqual(coarseVal, fineVal,1e-12, "Expected different EF when soil texture changes, verifying fresh calculation (new cache key).");
+            Assert.AreNotEqual(coarseVal, fineVal, 1e-12, "Expected different EF when soil texture changes, verifying fresh calculation (new cache key).");
         }
 
         /// <summary>
@@ -209,7 +213,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             Assert.AreNotEqual(result1, results2, 1e-12, "Expected different EF when ecodistrict changes, verifying fresh calculation (new cache key).");
 
             // Revert to original ecodistrict to ensure cached/original value is returned consistently
-            
+
             soilData.EcodistrictId = 371;
             var result1Again = _sut.CalculateBaseEcodistrictFactor(_farm, _viewItem, year);
             Assert.AreEqual(result1, result1Again, 1e-12, "Reverting ecodistrict should yield the original value (cache hit).");
@@ -648,7 +652,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             viewItem.DigestateApplicationViewItems.Add(digestateApplication);
 
             digestateApplication.DateCreated = viewItem.DateCreated;
-            
+
 
             var field = base.GetTestFieldComponent();
             farm.Components.Add(field);
@@ -800,7 +804,7 @@ namespace H.Core.Test.Calculators.Nitrogen
 
             var currentYear = DateTime.Now.Year;
 
-            var cropViewItem = new CropViewItem() {Year = currentYear, Area = 20};
+            var cropViewItem = new CropViewItem() { Year = currentYear, Area = 20 };
             var farm = base.GetTestFarm();
             var field = base.GetTestFieldComponent();
             field.FieldArea = 100;
@@ -810,9 +814,9 @@ namespace H.Core.Test.Calculators.Nitrogen
             field2.FieldArea = 300;
             farm.Components.Add(field2);
 
-            var detailViewItem1 = new CropViewItem() {Year = currentYear, CropType = CropType.Barley};
-            var detailViewItem2 = new CropViewItem() {Year = currentYear, CropType = CropType.Wheat};
-            var detailViewItem3 = new CropViewItem() { Year = (currentYear - 3) ,CropType = CropType.Beans};
+            var detailViewItem1 = new CropViewItem() { Year = currentYear, CropType = CropType.Barley };
+            var detailViewItem2 = new CropViewItem() { Year = currentYear, CropType = CropType.Wheat };
+            var detailViewItem3 = new CropViewItem() { Year = (currentYear - 3), CropType = CropType.Beans };
 
             var stageState = new FieldSystemDetailsStageState();
             stageState.DetailsScreenViewCropViewItems.Add(detailViewItem1);
@@ -865,9 +869,9 @@ namespace H.Core.Test.Calculators.Nitrogen
             viewItem.Area = 50;
             farm.Components.Add(field);
             field.CropViewItems.Add(viewItem);
-            
 
-            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() {ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100});
+
+            viewItem.DigestateApplicationViewItems.Add(new DigestateApplicationViewItem() { ManureLocationSourceType = ManureLocationSourceType.Livestock, DateCreated = DateTime.Now, AmountOfNitrogenAppliedPerHectare = 100 });
 
             var result = _sut.GetTotalDigestateNitrogenAppliedFromLivestockAndImportsInYear(viewItem, farm);
 
@@ -1097,7 +1101,7 @@ namespace H.Core.Test.Calculators.Nitrogen
             fieldWithManureApplication.FieldArea = 133;
 
             viewItem.FieldSystemComponentGuid = fieldWithManureApplication.Guid;
-            
+
             farm.Components.Add(fieldWithManureApplication);
             viewItem.FieldSystemComponentGuid = fieldWithManureApplication.Guid;
 
@@ -1144,10 +1148,10 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void CalculateTopographyEmissions_Cache_Used_For_Irrigated_Branch()
         {
             // Arrange
-            var fTopo =0.25; // fraction of land in lower landscape
-            var precip =50.0;
-            var evap =50.0; // equal would also trigger irrigated branch due to equality, but we set irrigation >0 to be explicit
-            var irrigation =10.0; // >0 ensures irrigated branch
+            var fTopo = 0.25; // fraction of land in lower landscape
+            var precip = 50.0;
+            var evap = 50.0; // equal would also trigger irrigated branch due to equality, but we set irrigation >0 to be explicit
+            var irrigation = 10.0; // >0 ensures irrigated branch
 
             var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
             var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
@@ -1160,18 +1164,18 @@ namespace H.Core.Test.Calculators.Nitrogen
             var afterSecond = cache.Count;
 
             // Assert
-            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (irrigated branch).");
-            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call.");
+            Assert.AreEqual(v1, v2, 0.0, "Cached value should be stable for identical inputs (irrigated branch).");
+            Assert.IsTrue(afterFirst >= before + 1, "Expected cache to add an entry on first call.");
             Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache.");
         }
 
         [TestMethod]
         public void CalculateTopographyEmissions_Cache_Used_For_Humid_Branch()
         {
-            var fTopo =0.30;
-            var precip =200.0;
-            var evap =100.0; // precip/evap >1 => humid
-            var irrigation =0.0;
+            var fTopo = 0.30;
+            var precip = 200.0;
+            var evap = 100.0; // precip/evap >1 => humid
+            var irrigation = 0.0;
 
             var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
             var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
@@ -1182,18 +1186,18 @@ namespace H.Core.Test.Calculators.Nitrogen
             var v2 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
             var afterSecond = cache.Count;
 
-            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (humid branch).");
-            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call (humid).");
+            Assert.AreEqual(v1, v2, 0.0, "Cached value should be stable for identical inputs (humid branch).");
+            Assert.IsTrue(afterFirst >= before + 1, "Expected cache to add an entry on first call (humid).");
             Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache (humid).");
         }
 
         [TestMethod]
         public void CalculateTopographyEmissions_Cache_Used_For_Dry_Branch()
         {
-            var fTopo =0.40;
-            var precip =40.0;
-            var evap =100.0; // precip/evap <=1 => dry
-            var irrigation =0.0;
+            var fTopo = 0.40;
+            var precip = 40.0;
+            var evap = 100.0; // precip/evap <=1 => dry
+            var irrigation = 0.0;
 
             var cacheField = typeof(N2OEmissionFactorCalculator).GetField("_topographyCalculationCache", BindingFlags.Instance | BindingFlags.NonPublic);
             var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
@@ -1204,8 +1208,8 @@ namespace H.Core.Test.Calculators.Nitrogen
             var v2 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
             var afterSecond = cache.Count;
 
-            Assert.AreEqual(v1, v2,0.0, "Cached value should be stable for identical inputs (dry branch).");
-            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call (dry).");
+            Assert.AreEqual(v1, v2, 0.0, "Cached value should be stable for identical inputs (dry branch).");
+            Assert.IsTrue(afterFirst >= before + 1, "Expected cache to add an entry on first call (dry).");
             Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache (dry).");
         }
 
@@ -1216,24 +1220,24 @@ namespace H.Core.Test.Calculators.Nitrogen
             var cache = (System.Collections.IDictionary)cacheField.GetValue(_sut);
             var before = cache.Count;
 
-            var fTopo =0.20;
-            var precip =60.0;
-            var evap =120.0;
-            var irrigation =0.0;
+            var fTopo = 0.20;
+            var precip = 60.0;
+            var evap = 120.0;
+            var irrigation = 0.0;
 
             var v1 = _sut.CalculateTopographyEmissions(fTopo, precip, evap, irrigation);
             var afterFirst = cache.Count;
 
             // Change one component of the cache key (precipitation) to force a new entry
-            var precip2 =61.0;
+            var precip2 = 61.0;
             var v2 = _sut.CalculateTopographyEmissions(fTopo, precip2, evap, irrigation);
             var afterSecond = cache.Count;
 
-            Assert.IsTrue(afterFirst >= before +1, "Expected cache to add an entry on first call.");
-            Assert.IsTrue(afterSecond >= afterFirst +1, "Changing an input should create a new cache entry.");
+            Assert.IsTrue(afterFirst >= before + 1, "Expected cache to add an entry on first call.");
+            Assert.IsTrue(afterSecond >= afterFirst + 1, "Changing an input should create a new cache entry.");
 
             // Values should typically differ for different precipitation; if equal due to function behavior, cache size assertions still validate new key
-            if (Math.Abs(v1 - v2) <1e-12)
+            if (Math.Abs(v1 - v2) < 1e-12)
             {
                 Assert.Inconclusive("Topography emission values are equal for very similar inputs, but a distinct cache key was created as expected.");
             }
@@ -1243,7 +1247,7 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void CalculateBaseEcodistrictValue_Cache_Stable_Across_Identical_Calls()
         {
             // Arrange
-            double topo =0.0123;
+            double topo = 0.0123;
             var texture = SoilTexture.Coarse;
             var region = Region.WesternCanada;
 
@@ -1258,8 +1262,8 @@ namespace H.Core.Test.Calculators.Nitrogen
             var afterSecond = cache.Count;
 
             // Assert
-            Assert.AreEqual(v1, v2,0.0, "Cached base ecodistrict value should be stable across identical calls.");
-            Assert.IsTrue(afterFirst >= before +1, "First call should add a cache entry.");
+            Assert.AreEqual(v1, v2, 0.0, "Cached base ecodistrict value should be stable across identical calls.");
+            Assert.IsTrue(afterFirst >= before + 1, "First call should add a cache entry.");
             Assert.AreEqual(afterFirst, afterSecond, "Second identical call should not grow the cache.");
         }
 
@@ -1267,8 +1271,8 @@ namespace H.Core.Test.Calculators.Nitrogen
         public void CalculateBaseEcodistrictValue_NewEntry_When_InputsChange()
         {
             // Arrange
-            double topo1 =0.02;
-            double topo2 =0.03; // different topography emission
+            double topo1 = 0.02;
+            double topo2 = 0.03; // different topography emission
             var texture = SoilTexture.Fine;
             var region = Region.EasternCanada;
 
@@ -1283,10 +1287,10 @@ namespace H.Core.Test.Calculators.Nitrogen
             var afterSecond = cache.Count;
 
             // Assert
-            Assert.IsTrue(afterFirst >= before +1, "First call should add a cache entry.");
-            Assert.IsTrue(afterSecond >= afterFirst +1, "Changing an input should create a new cache entry.");
+            Assert.IsTrue(afterFirst >= before + 1, "First call should add a cache entry.");
+            Assert.IsTrue(afterSecond >= afterFirst + 1, "Changing an input should create a new cache entry.");
 
-            if (Math.Abs(v1 - v2) <1e-12)
+            if (Math.Abs(v1 - v2) < 1e-12)
             {
                 Assert.Inconclusive("Values equal for these inputs, but cache recorded a distinct key as expected.");
             }

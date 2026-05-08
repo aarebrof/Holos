@@ -1,6 +1,9 @@
 ﻿#region Imports
 
+using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Models.Animals;
+using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Shelterbelt;
 using H.Core.Providers;
@@ -9,7 +12,6 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Feed;
 using H.Core.Providers.Soil;
 using H.Core.Tools;
-using H.Core.Models.Infrastructure;
 using H.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -18,13 +20,6 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Security.Permissions;
-using System.Windows.Controls.Primitives;
-using System.Windows.Navigation;
-using AutoMapper.Configuration.Conventions;
-using H.Core.Models.Animals;
-using H.Core.Converters;
-using H.Core.Emissions.Results;
 
 #endregion
 
@@ -949,6 +944,7 @@ namespace H.Core.Models
             return this.ClimateData.GetGrowingSeasonEvapotranspiration(year);
         }
 
+
         /// <summary>
         /// Returns all manure application made on this farm
         /// </summary>
@@ -1161,6 +1157,24 @@ namespace H.Core.Models
                     return this.DefaultSoilData;
                 }
             }
+        }
+
+        /// <summary>
+        /// Returns field-level climate data if the field associated with the <see cref="CropViewItem"/> has field-level climate enabled,
+        /// otherwise returns the farm-level <see cref="ClimateData"/>.
+        /// </summary>
+        public ClimateData GetPreferredClimateData(CropViewItem cropViewItem)
+        {
+            if (cropViewItem == null &&
+                this.GetFieldSystemComponent(cropViewItem.FieldSystemComponentGuid) is FieldSystemComponent fieldSystemComponent &&
+                fieldSystemComponent.UseFieldLevelClimateData &&
+                fieldSystemComponent.ClimateData != null &&
+                fieldSystemComponent.ClimateData.DailyClimateData.Count > 0)
+            {
+                return fieldSystemComponent.ClimateData;
+            }
+
+            return this.ClimateData;
         }
 
         public List<CropViewItem> GetAllCropViewItems()
