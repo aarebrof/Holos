@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Climate;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Climate
 {
@@ -11,7 +11,6 @@ namespace H.Core.Services.Initialization.Climate
         void InitializeClimate(Farm farm, int startYear, int endYear);
         void InitializeClimate(Farm farm, IEnumerable<DailyClimateData> dailyClimateData);
         void SetClimateNormals(Farm farm, IEnumerable<DailyClimateData> climateForPeriod);
-
-        void InitializeFieldLevelClimate(Farm farm, FieldSystemComponent fieldSystemComponent);
+        void InitializeFieldLevelClimate(FieldSystemComponent fieldSystemComponent, List<DailyClimateData> climateData);
     }
 }
