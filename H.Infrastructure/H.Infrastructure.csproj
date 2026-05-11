@@ -8,6 +8,7 @@
     <RepositoryUrl>https://github.com/holos-aafc/Holos</RepositoryUrl>
     <PackageTags>holos, aafc, agriculture, ghg</PackageTags>
     <OutputType>Library</OutputType>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <SccProjectName></SccProjectName>
     <SccLocalPath></SccLocalPath>
     <SccAuxPath></SccAuxPath>
