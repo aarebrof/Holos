@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -7,6 +7,7 @@ using H.Infrastructure;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services
 {
@@ -27,7 +28,7 @@ namespace H.Core.Services
 
             _fieldComponentHelper = new FieldComponentHelper();
 
-            var cropViewItemMappingConfiguration = new MapperConfiguration(configuration =>
+            var cropViewItemMappingConfiguration = MapperConfigurationFactory.Create(configuration =>
             {
                 configuration.CreateMap<CropViewItem, CropViewItem>()
                     .ForMember(x => x.IsInitialized, options => options.Ignore())

@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
@@ -10,6 +10,7 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Providers.Feed
 {
@@ -60,12 +61,12 @@ namespace H.Core.Providers.Feed
 
         static Diet()
         {
-            _dietMapperConfiguration = new MapperConfiguration(x =>
+            _dietMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<Diet, Diet>().ForMember(property => property.Ingredients, options => options.Ignore());
             });
 
-            _ingredientMapperConfiguration = new MapperConfiguration(x =>
+            _ingredientMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>()
                     .ForMember(property => property.Guid, options => options.Ignore());

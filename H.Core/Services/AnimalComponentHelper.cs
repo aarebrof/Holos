@@ -1,7 +1,8 @@
-﻿#region Imports
+#region Imports
 
 using AutoMapper;
 using H.Core.Enumerations;
+using H.Core.Mappers;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Providers.Feed;
@@ -29,7 +30,7 @@ namespace H.Core.Services
 
         public AnimalComponentHelper()
         {
-            var animalGroupMapperConfiguration = new MapperConfiguration(x =>
+            var animalGroupMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<AnimalGroup, AnimalGroup>()
                     .ForMember(y => y.Guid, z => z.Ignore())
@@ -38,7 +39,7 @@ namespace H.Core.Services
 
             _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
 
-            var managementPeriodMapperConfiguration = new MapperConfiguration(x =>
+            var managementPeriodMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<ManagementPeriod, ManagementPeriod>()
                     .ForMember(y => y.Guid, z => z.Ignore())
@@ -170,7 +171,7 @@ namespace H.Core.Services
 
         public void ReplicateManureDetails(ManagementPeriod from, ManagementPeriod to)
         {
-            var configuration = new MapperConfiguration(x =>
+            var configuration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<ManureDetails, ManureDetails>()
                  .ForMember(y => y.Name, z => z.Ignore())
@@ -186,7 +187,7 @@ namespace H.Core.Services
 
         public void ReplicateHousingDetails(ManagementPeriod from, ManagementPeriod to)
         {
-            var configuration = new MapperConfiguration(x =>
+            var configuration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<HousingDetails, HousingDetails>()
                  .ForMember(y => y.Name, z => z.Ignore())

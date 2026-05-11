@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -9,6 +9,7 @@ using H.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services.Animals
 {
@@ -67,7 +68,7 @@ namespace H.Core.Services.Animals
         {
             _manureTanks = new List<ManureTank>();
 
-            var manureCompositionMapperConfiguration = new MapperConfiguration(x =>
+            var manureCompositionMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<DefaultManureCompositionData, DefaultManureCompositionData>()
                     .ForMember(y => y.Guid, z => z.Ignore());

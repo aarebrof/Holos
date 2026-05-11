@@ -1,7 +1,8 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -26,7 +27,7 @@ namespace H.Core.Services.Initialization.Crops
                 return;
             }
 
-            var customCropDefaultsMapperConfiguration = new MapperConfiguration(configuration =>
+            var customCropDefaultsMapperConfiguration = MapperConfigurationFactory.Create(configuration =>
             {
                 // Don't copy the GUID, and do not overwrite the year, name, or area, on the crop
                 configuration.CreateMap<CropViewItem, CropViewItem>()

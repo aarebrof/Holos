@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Providers.Economics
 {
@@ -76,7 +77,7 @@ namespace H.Core.Providers.Economics
         public CropEconomicData Get(CropType cropType, SoilFunctionalCategory soilFunctionalCategory, Province province)
         {
             //we need a deep copy of the econ data
-            var config = new MapperConfiguration(cfg => cfg.CreateMap<CropEconomicData, CropEconomicData>());
+            var config = MapperConfigurationFactory.Create(cfg => cfg.CreateMap<CropEconomicData, CropEconomicData>());
             var mapper = config.CreateMapper();
 
             var soilCategory = soilFunctionalCategory.GetBaseSoilFunctionalCategory();

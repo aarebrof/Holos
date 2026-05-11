@@ -1,4 +1,4 @@
-﻿#region Imports
+#region Imports
 
 using AutoMapper;
 using H.Core.Calculators.UnitsOfMeasurement;
@@ -6,6 +6,7 @@ using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
 using System;
+using H.Core.Mappers;
 
 #endregion
 
@@ -209,7 +210,7 @@ namespace H.Core.Providers.Feed
 
         static FeedIngredient()
         {
-            var mapperConfig = new MapperConfiguration(x =>
+            var mapperConfig = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>().ForMember(prop => prop.Guid, opt => opt.Ignore());
             });

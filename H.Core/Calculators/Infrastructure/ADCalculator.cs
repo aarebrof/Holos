@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SubstrateFlowInformation = H.Core.Models.Infrastructure.SubstrateFlowInformation;
+using H.Core.Mappers;
 
 namespace H.Core.Calculators.Infrastructure
 {
@@ -30,7 +31,7 @@ namespace H.Core.Calculators.Infrastructure
 
         public ADCalculator()
         {
-            var substrateFlowMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var substrateFlowMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<SubstrateFlowInformation, SubstrateFlowInformation>()
                     .ForMember(property => property.Name, options => options.Ignore())

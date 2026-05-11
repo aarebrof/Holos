@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
@@ -9,6 +9,7 @@ using H.Core.Services.Initialization.Crops;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services
 {
@@ -36,7 +37,7 @@ namespace H.Core.Services
         {
             _cropInitializationService = new CropInitializationService();
 
-            var cropViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var cropViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<CropViewItem, CropViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore())
@@ -50,11 +51,11 @@ namespace H.Core.Services
             _cropViewItemMapper = cropViewItemMapperConfiguration.CreateMapper();
 
             var cropEconomicDataMapperConfiguration =
-                new MapperConfiguration(x => x.CreateMap<CropEconomicData, CropEconomicData>());
+                MapperConfigurationFactory.Create(x => x.CreateMap<CropEconomicData, CropEconomicData>());
 
             _cropEconomicDataMapper = cropEconomicDataMapperConfiguration.CreateMapper();
 
-            var harvestPeriodMapperConfiguration = new MapperConfiguration(x =>
+            var harvestPeriodMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<HarvestViewItem, HarvestViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
@@ -62,7 +63,7 @@ namespace H.Core.Services
 
             _harvestPeriodMapper = harvestPeriodMapperConfiguration.CreateMapper();
 
-            var grazingPeriodMapperConfiguration = new MapperConfiguration(x =>
+            var grazingPeriodMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<GrazingViewItem, GrazingViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore());
@@ -70,21 +71,21 @@ namespace H.Core.Services
 
             _grazingPeriodMapper = grazingPeriodMapperConfiguration.CreateMapper();
 
-            var manureApplicationViewItemMapper = new MapperConfiguration(x =>
+            var manureApplicationViewItemMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>();
             });
 
             _manureApplicationViewItemMapper = manureApplicationViewItemMapper.CreateMapper();
 
-            var hayImportViewItemMapper = new MapperConfiguration(x =>
+            var hayImportViewItemMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<HayImportViewItem, HayImportViewItem>();
             });
 
             _hayImportViewItemMapper = hayImportViewItemMapper.CreateMapper();
 
-            var digestateViewItemMapper = new MapperConfiguration(x =>
+            var digestateViewItemMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>();
             });
@@ -92,7 +93,7 @@ namespace H.Core.Services
             _digestateViewItemMapper = digestateViewItemMapper.CreateMapper();
 
 
-            var fertilizerApplicationViewItemMapper = new MapperConfiguration(x =>
+            var fertilizerApplicationViewItemMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>();
                 x.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>();
@@ -100,7 +101,7 @@ namespace H.Core.Services
             
             _fertilizerApplicationViewItemMapper = fertilizerApplicationViewItemMapper.CreateMapper();
 
-            var soilDataMapper = new MapperConfiguration(x =>
+            var soilDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
             });

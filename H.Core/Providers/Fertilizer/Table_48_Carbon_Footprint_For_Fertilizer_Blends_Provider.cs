@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
@@ -6,6 +6,7 @@ using H.Infrastructure;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Providers.Fertilizer
 {
@@ -26,7 +27,7 @@ namespace H.Core.Providers.Fertilizer
 
         public Table_48_Carbon_Footprint_For_Fertilizer_Blends_Provider()
         {
-            var configuration = new MapperConfiguration(expression =>
+            var configuration = MapperConfigurationFactory.Create(expression =>
             {
                 expression.CreateMap<Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data, Table_48_Carbon_Footprint_For_Fertilizer_Blends_Data>()
                     .ForMember(property => property.Guid, options => options.Ignore());

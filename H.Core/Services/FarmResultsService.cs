@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services
 {
@@ -117,7 +118,7 @@ namespace H.Core.Services
 
             #region Farm Mapping
 
-            var farmMapperConfiguration = new MapperConfiguration(x =>
+            var farmMapperConfiguration = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<Farm, Farm>()
                     .ForMember(y => y.Name, z => z.Ignore())
@@ -143,7 +144,7 @@ namespace H.Core.Services
 
             #region Defaults
 
-            var defaultMapperConfiguration = new MapperConfiguration(x => { x.CreateMap<Defaults, Defaults>(); });
+            var defaultMapperConfiguration = MapperConfigurationFactory.Create(x => { x.CreateMap<Defaults, Defaults>(); });
 
             _defaultsMapper = defaultMapperConfiguration.CreateMapper();
 
@@ -151,7 +152,7 @@ namespace H.Core.Services
 
             #region Details Screen
 
-            var detailsScreenCropViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var detailsScreenCropViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 {
                     x.CreateMap<CropViewItem, CropViewItem>();
                 });
@@ -162,7 +163,7 @@ namespace H.Core.Services
 
             #region Climate Mappers
 
-            var climateDataMapper = new MapperConfiguration(x =>
+            var climateDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<PrecipitationData, PrecipitationData>();
                 x.CreateMap<TemperatureData, TemperatureData>();
@@ -174,7 +175,7 @@ namespace H.Core.Services
 
             _climateDataMapper = climateDataMapper.CreateMapper();
 
-            var dailyclimateDataMapper = new MapperConfiguration(x =>
+            var dailyclimateDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<DailyClimateData, DailyClimateData>();
             });
@@ -185,7 +186,7 @@ namespace H.Core.Services
 
             #region GeographicData Mappers
 
-            var geographicDataMapper = new MapperConfiguration(x =>
+            var geographicDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<GeographicData, GeographicData>()
                     .ForMember(y => y.SoilDataForAllComponentsWithinPolygon, z => z.Ignore())
@@ -196,14 +197,14 @@ namespace H.Core.Services
 
             _geographicDataMapper = geographicDataMapper.CreateMapper();
 
-            var soilDataMapper = new MapperConfiguration(x =>
+            var soilDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
             });
 
             _soilDataMapper = soilDataMapper.CreateMapper();
 
-            var customYieldMapper = new MapperConfiguration(x =>
+            var customYieldMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<CustomUserYieldData, CustomUserYieldData>();
             });

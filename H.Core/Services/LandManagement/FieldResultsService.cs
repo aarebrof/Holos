@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Climate;
 using H.Core.Calculators.Nitrogen;
@@ -16,6 +16,7 @@ using H.Core.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services.LandManagement
 {
@@ -106,7 +107,7 @@ namespace H.Core.Services.LandManagement
              * Create a mapper that will map component selection view items to detail view items
              */
 
-            var componentSelectionViewItemToDetailViewItemMapperConfiguration = new MapperConfiguration(configuration =>
+            var componentSelectionViewItemToDetailViewItemMapperConfiguration = MapperConfigurationFactory.Create(configuration =>
             {
                 configuration.CreateMap<CropViewItem, CropViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
@@ -123,42 +124,42 @@ namespace H.Core.Services.LandManagement
 
             _detailViewItemMapper = componentSelectionViewItemToDetailViewItemMapperConfiguration.CreateMapper();
 
-            var manureApplicationViewItemConfiguration = new MapperConfiguration(configure: configuration =>
+            var manureApplicationViewItemConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<ManureApplicationViewItem, ManureApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
-            var hayImportViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var hayImportViewItemMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<HayImportViewItem, HayImportViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
-            var grazingViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var grazingViewItemMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<GrazingViewItem, GrazingViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
-            var harvestViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var harvestViewItemMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<HarvestViewItem, HarvestViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
-            var fertilizerViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var fertilizerViewItemMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<FertilizerApplicationViewItem, FertilizerApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())
                     .ForMember(property => property.Guid, options => options.Ignore());
             });
 
-            var digestateViewItemMapperConfiguration = new MapperConfiguration(configure: configuration =>
+            var digestateViewItemMapperConfiguration = MapperConfigurationFactory.Create(configure: configuration =>
             {
                 configuration.CreateMap<DigestateApplicationViewItem, DigestateApplicationViewItem>()
                     .ForMember(property => property.Name, options => options.Ignore())

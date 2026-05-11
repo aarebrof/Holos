@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using H.Core.Mappers;
 
 namespace H.Core.Services
 {
@@ -31,7 +32,7 @@ namespace H.Core.Services
 
         public AnaerobicDigestionComponentHelper()
         {
-            var anaerobicDigestionComponentMapperConfiguration = new MapperConfiguration(x =>
+            var anaerobicDigestionComponentMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 x.CreateMap<AnaerobicDigestionComponent, AnaerobicDigestionComponent>()
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.CurrentPeriodComponentGuid, z => z.Ignore())
@@ -39,7 +40,7 @@ namespace H.Core.Services
                     .ForMember(y => y.ManagementPeriodViewItems, z => z.Ignore()));
             _anaerobicDigestionComponentMapper = anaerobicDigestionComponentMapperConfiguration.CreateMapper();
 
-            var anaerobicDigestionViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var anaerobicDigestionViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
                     x.CreateMap<AnaerobicDigestionViewItem, AnaerobicDigestionViewItem>()
                 .ForMember(y => y.Guid, z => z.Ignore())
                 .ForMember(y => y.CropResiduesSubstrateViewItems, z => z.Ignore())
@@ -47,7 +48,7 @@ namespace H.Core.Services
                 .ForMember(y => y.ManureSubstrateViewItems, z => z.Ignore()));
             _anaerobicDigestionViewItemMapper = anaerobicDigestionViewItemMapperConfiguration.CreateMapper();
 
-            var managementPeriodViewItemsMapperConfiguration = new MapperConfiguration(x =>
+            var managementPeriodViewItemsMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 x.CreateMap<ADManagementPeriodViewItem, ADManagementPeriodViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore())
                     .ForMember(y => y.AnimalComponent, z => z.Ignore())
@@ -55,21 +56,21 @@ namespace H.Core.Services
                     .ForMember(y => y.ManagementPeriod, z => z.Ignore()));
             _managementPeriodViewItemsMapper = managementPeriodViewItemsMapperConfiguration.CreateMapper();
 
-            var animalGroupMapperConfiguration = new MapperConfiguration(x => x.CreateMap<AnimalGroup, AnimalGroup>()
+            var animalGroupMapperConfiguration = MapperConfigurationFactory.Create(x => x.CreateMap<AnimalGroup, AnimalGroup>()
                 .ForMember(y => y.ManagementPeriods, z => z.Ignore()));
             _animalGroupMapper = animalGroupMapperConfiguration.CreateMapper();
 
-            var cropResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var cropResiduesSubstrateViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 x.CreateMap<CropResidueSubstrateViewItem, CropResidueSubstrateViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore()));
             _cropResiduesSubstrateViewItemMapper = cropResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
 
-            var farmResiduesSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var farmResiduesSubstrateViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 x.CreateMap<FarmResiduesSubstrateViewItem, FarmResiduesSubstrateViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore()));
             _farmResiduesSubstrateViewItemMapper = farmResiduesSubstrateViewItemMapperConfiguration.CreateMapper();
 
-            var manureSubstrateViewItemMapperConfiguration = new MapperConfiguration(x =>
+            var manureSubstrateViewItemMapperConfiguration = MapperConfigurationFactory.Create(x =>
                 x.CreateMap<ManureSubstrateViewItem, ManureSubstrateViewItem>()
                     .ForMember(y => y.Guid, z => z.Ignore()));
             _manureSubstrateViewItemMapper = manureSubstrateViewItemMapperConfiguration.CreateMapper();

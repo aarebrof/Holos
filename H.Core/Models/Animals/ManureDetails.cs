@@ -1,9 +1,10 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
 using System.ComponentModel;
+using H.Core.Mappers;
 
 namespace H.Core.Models.Animals
 {
@@ -48,7 +49,7 @@ namespace H.Core.Models.Animals
 
         static ManureDetails()
         {
-            var manureDetailsMapperConfiguration = new MapperConfiguration(config =>
+            var manureDetailsMapperConfiguration = MapperConfigurationFactory.Create(config =>
             {
                 config.CreateMap<ManureDetails, ManureDetails>()
                     .ForMember(manureDetails => manureDetails.Guid, opt => opt.Ignore())

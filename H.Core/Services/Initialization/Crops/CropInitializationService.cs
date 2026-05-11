@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Calculators.Carbon;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Nitrogen;
@@ -14,6 +14,7 @@ using H.Core.Providers.Soil;
 using H.Core.Services.Animals;
 using H.Core.Services.LandManagement;
 using System.Diagnostics;
+using H.Core.Mappers;
 
 namespace H.Core.Services.Initialization.Crops
 {
@@ -75,7 +76,7 @@ namespace H.Core.Services.Initialization.Crops
             _utilizationRatesForLivestockGrazingProvider = new Table_60_Utilization_Rates_For_Livestock_Grazing_Provider();
             _manureService = new ManureService();
 
-            var soilDataMapper = new MapperConfiguration(x =>
+            var soilDataMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<SoilData, SoilData>();
             });

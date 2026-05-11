@@ -1,4 +1,4 @@
-﻿#region Imports
+#region Imports
 
 using AutoMapper;
 using H.Content;
@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using H.Core.Mappers;
 
 #endregion
 
@@ -37,7 +38,7 @@ namespace H.Core.Providers.Feed
             _dairyIngredients = this.ReadDairyFile().ToList();
             _swineFeedIngredients = this.ReadSwineFile().ToList();
 
-            var feedIngredientMapper = new MapperConfiguration(x =>
+            var feedIngredientMapper = MapperConfigurationFactory.Create(x =>
             {
                 x.CreateMap<FeedIngredient, FeedIngredient>();
             });

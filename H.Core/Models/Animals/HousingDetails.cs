@@ -1,10 +1,11 @@
-﻿using AutoMapper;
+using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
 using System.ComponentModel;
+using H.Core.Mappers;
 
 namespace H.Core.Models.Animals
 {
@@ -44,7 +45,7 @@ namespace H.Core.Models.Animals
 
         static HousingDetails()
         {
-            var housingDetailsConfiguration = new MapperConfiguration(config =>
+            var housingDetailsConfiguration = MapperConfigurationFactory.Create(config =>
             {
                 config.CreateMap<HousingDetails, HousingDetails>()
                     .ForMember(housingDetails => housingDetails.Guid, opt => opt.Ignore())
@@ -121,7 +122,7 @@ namespace H.Core.Models.Animals
         /// <summary>
         /// C_f_adjusted
         ///
-        /// (MJ day⁻¹ kg⁻¹)
+        /// (MJ day?� kg?�)
         /// </summary>
         [Units(MetricUnitsOfMeasurement.MegaJoulesPerDayPerKilogram)]
         public double MaintenanceCoefficientModifiedByTemperature
