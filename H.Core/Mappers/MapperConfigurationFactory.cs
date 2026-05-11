@@ -1,5 +1,6 @@
-using System;
 using AutoMapper;
+using Microsoft.Extensions.Logging.Abstractions;
+using System;
 
 namespace H.Core.Mappers
 {
@@ -11,7 +12,11 @@ namespace H.Core.Mappers
     {
         public static MapperConfiguration Create(Action<IMapperConfigurationExpression> configure)
         {
-            return new MapperConfiguration(configure, null);
+            return new MapperConfiguration(cfg =>
+            {
+                cfg.LicenseKey = "LICENSE KEY";
+                configure(cfg);
+            }, new NullLoggerFactory());
         }
     }
 }

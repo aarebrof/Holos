@@ -1,6 +1,7 @@
 using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
+using H.Core.Mappers;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
 using H.Core.Providers.AnaerobicDigestion;
@@ -8,15 +9,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using SubstrateFlowInformation = H.Core.Models.Infrastructure.SubstrateFlowInformation;
-using H.Core.Mappers;
 
 namespace H.Core.Calculators.Infrastructure
 {
-    public partial class ADCalculator : IADCalculator  
+    public partial class ADCalculator : IADCalculator
     {
         #region Fields
 
-        
+
         private readonly IMapper _substrateMapper;
 
         protected readonly Table_47_Solid_Liquid_Separation_Coefficients_Provider
@@ -145,7 +145,7 @@ namespace H.Core.Calculators.Infrastructure
             if (animalType.IsBeefCattleType() || animalType.IsDairyCattleType() || animalType.IsPoultryType())
             {
                 // Equation 4.8.1-16
-                totalMassFlowOfSubstrate = (((dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * 100) / nitrogenContentOfManure) * fractionUsed; 
+                totalMassFlowOfSubstrate = (((dailyEmissions.AdjustedAmountOfTanInStoredManureOnDay + dailyEmissions.OrganicNitrogenCreatedOnDay) * 100) / nitrogenContentOfManure) * fractionUsed;
             }
             else
             {
@@ -168,7 +168,7 @@ namespace H.Core.Calculators.Infrastructure
                 // Equation 4.8.1-19
                 var a = volatileSolidsAvailableOnCurrentDay / (dailyEmissions.AccumulatedVolume * 1000);
                 var b = (dailyEmissions.AccumulatedVolume) - (previousDaysEmissions == null ? 0 : previousDaysEmissions.AccumulatedVolume);
-                var c = fractionUsed * 1000; 
+                var c = fractionUsed * 1000;
 
                 var result = a * (b * c);
 
@@ -336,7 +336,7 @@ namespace H.Core.Calculators.Infrastructure
             var methaneEmissionFactorDuringStorage = 0.0176 * Math.Pow(temperature, 2) - 0.0118 * temperature + 0.0743;
 
             // Equation 4.8.5-1
-            digestorDailyOutput.MethaneEmissionsDuringStorage = (methaneEmissionFactorDuringStorage / 1000000.0)*
+            digestorDailyOutput.MethaneEmissionsDuringStorage = (methaneEmissionFactorDuringStorage / 1000000.0) *
                                                                 digestorDailyOutput.FlowRateOfAllSubstratesInDigestate;
 
             // Equation 4.8.5-2
@@ -716,7 +716,7 @@ namespace H.Core.Calculators.Infrastructure
         }
 
         public List<SubstrateFlowInformation> GetDailyFlowRatesForSubstrateTypes(
-            IEnumerable<SubstrateViewItemBase> substrateViewItems, 
+            IEnumerable<SubstrateViewItemBase> substrateViewItems,
             SubstrateType type,
             AnaerobicDigestionComponent component)
         {
@@ -829,7 +829,7 @@ namespace H.Core.Calculators.Infrastructure
                         {
                             carbonFactor = CoreConstants.CarbonConcentration;
                         }
-                        else if(substrateViewItemBase is FarmResiduesSubstrateViewItem farmResiduesSubstrateViewItem)
+                        else if (substrateViewItemBase is FarmResiduesSubstrateViewItem farmResiduesSubstrateViewItem)
                         {
                             if (farmResiduesSubstrateViewItem.FarmResidueType == FarmResidueType.SweageSludge)
                             {
@@ -844,7 +844,7 @@ namespace H.Core.Calculators.Infrastructure
                                 carbonFactor = substrateViewItemBase.TotalCarbon;
                             }
                         }
-                        
+
                         substrateFlow.CarbonFlowOfSubstrate = substrateFlow.TotalSolidsFlowOfSubstrate * carbonFactor;
                     }
                     else
@@ -913,7 +913,7 @@ namespace H.Core.Calculators.Infrastructure
                             for (int i = 0; i < groupEmissionsByMonth.DailyEmissions.Count; i++)
                             {
                                 var currentDayEmissions = groupEmissionsByMonth.DailyEmissions.ElementAt(i);
-                                
+
                                 var flowRates = this.GetStoredManureFlowRate(
                                     component,
                                     currentDayEmissions,
@@ -959,11 +959,11 @@ namespace H.Core.Calculators.Infrastructure
                 this.CalculateTotalProductionFromAllSubstratesOnSameDay(dailyOutput, flowsForDate);
                 this.CalculateTotalBiogasProductionFromAllSubstratesOnSameDay(dailyOutput, flowsForDate);
                 this.CalculateLiquidSolidSeparation(dailyOutput, component);
-                this.CalculateAmountsForLandApplication(dailyOutput);  
+                this.CalculateAmountsForLandApplication(dailyOutput);
                 this.CalculateDigestateStorageEmissions(farm, dailyOutput.Date, component, dailyOutput);
 
                 // Equation 4.8.6-1
-                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = dailyOutput.FlowRateOfTotalNitrogenInDigestate - (CoreConstants.ConvertToN(dailyOutput.N2OEmissionsDuringStorage ) + CoreConstants.ConvertToNH3N(dailyOutput.AmmoniaEmissionsDuringStorage));
+                dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = dailyOutput.FlowRateOfTotalNitrogenInDigestate - (CoreConstants.ConvertToN(dailyOutput.N2OEmissionsDuringStorage) + CoreConstants.ConvertToNH3N(dailyOutput.AmmoniaEmissionsDuringStorage));
                 if (dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication < 0)
                 {
                     dailyOutput.TotalNitrogenInDigestateAvailableForLandApplication = 0;

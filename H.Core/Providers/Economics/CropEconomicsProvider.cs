@@ -2,12 +2,12 @@ using AutoMapper;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
+using H.Core.Mappers;
 using H.Infrastructure;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
-using H.Core.Mappers;
 
 namespace H.Core.Providers.Economics
 {

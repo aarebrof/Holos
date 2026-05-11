@@ -10,9 +10,6 @@
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System.IO.Compression" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\H.Core\H.Core.csproj" />
     <ProjectReference Include="..\H.Infrastructure\H.Infrastructure.csproj" />
   </ItemGroup>

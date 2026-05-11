@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32112.339
+# Visual Studio Version 18
+VisualStudioVersion = 18.5.11723.231 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.CLI", "H.CLI\H.CLI.csproj", "{7A9469D6-B913-49DB-B85F-319FD195C212}"
 EndProject
@@ -20,15 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H.Infrastructure.Test", "H.Infrastructure.Test\H.Infrastructure.Test.csproj", "{BF7DBF54-7513-4071-919A-5791FDCC6370}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DDD11503-DD20-4ED1-B246-C93E5F376868}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_actions", "_actions", "{77B16CA8-F32F-4CA8-9F81-D556AC481930}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\dotnet-build-publish.yml = .github\workflows\dotnet-build-publish.yml
-		.github\workflows\dotnet-pr-build.yml = .github\workflows\dotnet-pr-build.yml
-		.github\workflows\_dotnet-build-template.yml = .github\workflows\_dotnet-build-template.yml
-		.github\workflows\_dotnet-nuget-template.yml = .github\workflows\_dotnet-nuget-template.yml
-		.github\workflows\_dotnet-publish-template.yml = .github\workflows\_dotnet-publish-template.yml
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

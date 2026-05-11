@@ -4,6 +4,7 @@ using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Emissions.Results;
 using H.Core.Events;
+using H.Core.Mappers;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
@@ -24,7 +25,6 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using H.Core.Mappers;
 
 namespace H.Core.Services
 {
@@ -63,7 +63,7 @@ namespace H.Core.Services
         {
             if (n2OEmissionFactorCalculator != null)
             {
-                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator; 
+                _n2OEmissionFactorCalculator = n2OEmissionFactorCalculator;
             }
             else
             {
@@ -127,7 +127,16 @@ namespace H.Core.Services
                     .ForMember(y => y.StageStates, z => z.Ignore())
                     .ForMember(y => y.ClimateData, z => z.Ignore())
                     .ForMember(y => y.GeographicData, z => z.Ignore())
-                    .ForMember(y => y.Components, z => z.Ignore());
+                    .ForMember(y => y.Components, z => z.Ignore())
+                    .ForMember(y => y.AnimalComponents, z => z.Ignore())
+                    .ForMember(y => y.DairyComponents, z => z.Ignore())
+                    .ForMember(y => y.BeefCattleComponents, z => z.Ignore())
+                    .ForMember(y => y.SwineComponents, z => z.Ignore())
+                    .ForMember(y => y.SheepComponents, z => z.Ignore())
+                    .ForMember(y => y.PoultryComponents, z => z.Ignore())
+                    .ForMember(y => y.OtherLivestockComponents, z => z.Ignore())
+                    .ForMember(y => y.FieldSystemComponents, z => z.Ignore())
+                    .ForMember(y => y.AnaerobicDigestionComponents, z => z.Ignore());
 
                 x.CreateMap<Table_15_Default_Soil_N2O_Emission_BreakDown_Provider,
                     Table_15_Default_Soil_N2O_Emission_BreakDown_Provider>();

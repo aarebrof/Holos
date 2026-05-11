@@ -1,5 +1,4 @@
-﻿using H.CLI.UserInput;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.LandManagement.Rotation;
@@ -84,7 +83,7 @@ namespace H.Core.Test.Integration
             // _climateProvider.Get(...) returns null if the NasaClimateProvider.GetCustomClimateData() call returned an empty list
             // This happens if there was an exception thrown (i.e. 502 Gateway Error) or etc. during the NASA Api Call 
             // return early to prevent unhandled exceptions or errors that lead to a failed test
-            if (farm.ClimateData == null )
+            if (farm.ClimateData == null)
             {
                 return;
             }
@@ -136,7 +135,7 @@ namespace H.Core.Test.Integration
             const string OutputDirectory = "HOLOS_OUTPUT\\";
             Directory.CreateDirectory(OutputDirectory);
 
-            _fieldResultsService.ExportResultsToFile(finalResults, OutputDirectory, CultureInfo.CurrentCulture, MeasurementSystemType.Metric, CLILanguageConstants.OutputLanguageAddOn, false, farm);
+            _fieldResultsService.ExportResultsToFile(finalResults, OutputDirectory, CultureInfo.CurrentCulture, MeasurementSystemType.Metric, "en-ca", false, farm);
         }
 
         [TestMethod]
@@ -166,7 +165,7 @@ namespace H.Core.Test.Integration
             }
 
             farm.ClimateAcquisition = Farm.ChosenClimateAcquisition.Custom;
-            
+
             farm.Defaults.DefaultRunInPeriod = 20;
 
             var fieldComponent = new FieldSystemComponent()
