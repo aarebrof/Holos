@@ -1,7 +1,7 @@
-﻿using System;
+﻿using H.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Shelterbelt
 {

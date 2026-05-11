@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using H.Core.Enumerations;
-using H.Core.Models;
+﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
-using H.Infrastructure;
+using System;
+using System.Linq;
 
 namespace H.Core.Services.LandManagement
 {

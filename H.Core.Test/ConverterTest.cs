@@ -1,9 +1,8 @@
-﻿using System.ComponentModel;
-using H.Core.Calculators.UnitsOfMeasurement;
-using H.Core.Enumerations;
+﻿using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Models;
 using H.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.ComponentModel;
 
 namespace H.Core.Test
 {

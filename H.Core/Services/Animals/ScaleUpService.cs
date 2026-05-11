@@ -1,8 +1,7 @@
-﻿using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 using H.Core.Providers.Animals.Table_28;
+using System;
 
 namespace H.Core.Services.Animals
 {

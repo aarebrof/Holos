@@ -1,9 +1,5 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using H.Content;
 using H.Core.Enumerations;
 using H.Core.Providers.Climate;
@@ -12,6 +8,10 @@ using H.Core.Providers.Precipitation;
 using H.Core.Providers.Temperature;
 using H.Core.Tools;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 #endregion
 

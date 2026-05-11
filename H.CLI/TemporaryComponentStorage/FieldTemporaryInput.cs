@@ -1,14 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Reflection;
-using H.CLI.Interfaces;
+﻿using H.CLI.Interfaces;
 using H.CLI.UserInput;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Nitrogen;
 using H.Core.Services.Initialization.Crops;
+using System;
+using System.Globalization;
+using System.Reflection;
 
 namespace H.CLI.TemporaryComponentStorage
 {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.LandManagement.Fields;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Animals
 {

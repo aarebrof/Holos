@@ -1,7 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Energy;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Providers.Energy
 {

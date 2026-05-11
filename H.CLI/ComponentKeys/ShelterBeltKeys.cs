@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using H.CLI.Interfaces;
+﻿using H.CLI.Interfaces;
 using H.Core.Enumerations;
+using System.Collections.Generic;
 
 namespace H.CLI.ComponentKeys
 {

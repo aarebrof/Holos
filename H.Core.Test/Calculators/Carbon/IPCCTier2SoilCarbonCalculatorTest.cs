@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Configuration;
-using System.IO;
-using System.Linq;
-using H.Core.Calculators.Carbon;
+﻿using H.Core.Calculators.Carbon;
+using H.Core.Calculators.Nitrogen;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using H.Core.Providers.Climate;
 using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using H.Core.Test.Calculators.Carbon;
-using H.Core.Providers.Climate;
-using H.Core.Providers;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Emissions.Results;
-using H.Core.Services.LandManagement;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Test.Calculators.Carbon
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using H.Core.Properties;
+﻿using H.Core.Properties;
 using H.Infrastructure;
+using System;
 
 namespace H.Core.Enumerations
 {

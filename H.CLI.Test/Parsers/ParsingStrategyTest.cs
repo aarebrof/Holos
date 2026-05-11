@@ -1,15 +1,12 @@
-﻿using H.CLI.UserInput;
-using H.Core.Enumerations;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Text;
-using H.CLI.ComponentKeys;
+﻿using H.CLI.ComponentKeys;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Parser;
 using H.CLI.TemporaryComponentStorage;
+using H.CLI.UserInput;
+using H.Core.Enumerations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Globalization;
+using System.IO;
 
 namespace H.CLI.Test.Parsers
 {

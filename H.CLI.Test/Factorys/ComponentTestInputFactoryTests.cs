@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using H.CLI.Factories;
+﻿using H.CLI.Factories;
 using H.CLI.TemporaryComponentStorage;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.CLI.Test.Factorys
 {

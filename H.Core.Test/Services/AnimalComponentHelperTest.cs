@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using H.Core.Models.Animals;
+using H.Core.Services;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
-using H.Core.Models.Animals;
-using H.Core.Services;
-using H.Core.Services.Animals;
 
 namespace H.Core.Test.Services
 {

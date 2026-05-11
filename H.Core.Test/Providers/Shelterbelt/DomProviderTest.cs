@@ -1,8 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Shelterbelt;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace H.Core.Test.Providers.Shelterbelt
 {

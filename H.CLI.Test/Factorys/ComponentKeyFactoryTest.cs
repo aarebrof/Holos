@@ -1,8 +1,8 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
 using H.CLI.ComponentKeys;
 using H.CLI.Factories;
 using H.CLI.UserInput;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Globalization;
 
 namespace H.CLI.Test.Factorys
 {

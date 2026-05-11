@@ -1,9 +1,8 @@
-﻿using H.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Providers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SharpKml.Base;
+using System.Collections.Generic;
 
 namespace H.Infrastructure.Test
 {

@@ -1,11 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using H.Core.Calculators.Economics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using H.Core.Calculators.Economics;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Providers.Economics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Test.Calculators.Economics
 {

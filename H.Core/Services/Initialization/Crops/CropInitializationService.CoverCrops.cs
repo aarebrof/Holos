@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Services.Initialization.Crops
 {

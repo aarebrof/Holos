@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using H.Infrastructure;
+using System.Collections.Generic;
 using System.Linq;
-using H.Infrastructure;
 
 namespace H.Core.Enumerations
 {

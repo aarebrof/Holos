@@ -1,13 +1,10 @@
 ﻿using H.CLI.UserInput;
 using H.Core.Calculators.UnitsOfMeasurement;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
-using System;
+using H.Core.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Emissions.Results;
-using H.Core.Models;
 
 namespace H.CLI.Results
 {

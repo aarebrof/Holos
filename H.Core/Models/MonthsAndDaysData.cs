@@ -1,9 +1,9 @@
 ﻿#region Imports
 
-using System;
-using System.Globalization;
 using H.Core.Models.Animals;
 using H.Core.Providers;
+using System;
+using System.Globalization;
 
 #endregion
 

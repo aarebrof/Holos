@@ -1,13 +1,10 @@
-﻿using H.CLI.TemporaryComponentStorage;
+﻿using H.CLI.Handlers;
+using H.CLI.Interfaces;
+using H.CLI.TemporaryComponentStorage;
 using H.Core.Enumerations;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.CLI.Handlers;
-using H.CLI.Interfaces;
 
 namespace H.CLI.Test.Handlers
 {

@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using H.Core.Calculators.Shelterbelt;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using System;
+﻿using H.Core.Calculators.Shelterbelt;
 using H.Core.Enumerations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Test.Calculators
 {

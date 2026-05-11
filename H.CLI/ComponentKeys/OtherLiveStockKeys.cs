@@ -1,12 +1,5 @@
-﻿using H.Core.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.CLI.Interfaces;
-using H.Core.Models.Animals;
-using System.Globalization;
+﻿using H.CLI.Interfaces;
+using H.Core.Enumerations;
 
 namespace H.CLI.ComponentKeys
 {

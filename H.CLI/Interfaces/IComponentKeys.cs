@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
+using System.Collections.Generic;
 
 namespace H.CLI.Interfaces
 {

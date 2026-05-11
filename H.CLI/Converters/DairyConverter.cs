@@ -1,18 +1,9 @@
-﻿using H.CLI.Interfaces;
+﻿using H.CLI.ComponentKeys;
+using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
-using H.Core.Enumerations;
-using H.Core.Providers.Feed;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.LandManagement.Fields;
-using H.CLI.ComponentKeys;
+using System.Collections.Generic;
 
 namespace H.CLI.Converters
 {

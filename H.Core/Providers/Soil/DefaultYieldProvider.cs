@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
-using H.Content;
+﻿using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Tools;
 using H.Infrastructure;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Providers.Soil
 {

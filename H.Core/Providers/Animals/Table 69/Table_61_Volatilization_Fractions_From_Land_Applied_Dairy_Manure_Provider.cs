@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using H.Content;
-using System.Globalization;
-using System.Linq;
+﻿using H.Content;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Providers.Animals.Table_69
 {

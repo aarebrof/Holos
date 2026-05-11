@@ -1,7 +1,6 @@
-﻿using H.Core.Providers.Irrigation;
+﻿using H.Core.Enumerations;
+using H.Core.Providers.Irrigation;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Enumerations;
 
 namespace H.Core.Test.Providers.Irrigation
 {

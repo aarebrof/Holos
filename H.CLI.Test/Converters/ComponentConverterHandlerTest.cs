@@ -1,16 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Globalization;
-using H.CLI.Converters;
+﻿using H.CLI.Converters;
 using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
 using H.CLI.UserInput;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
 
 namespace H.CLI.Test.Converters
 {

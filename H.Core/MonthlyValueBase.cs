@@ -1,8 +1,8 @@
-﻿using System;
+﻿using H.Core.Enumerations;
+using H.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core
 {

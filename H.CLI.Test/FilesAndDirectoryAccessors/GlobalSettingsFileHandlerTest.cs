@@ -1,18 +1,13 @@
 ﻿using H.CLI.FileAndDirectoryAccessors;
 using H.CLI.UserInput;
 using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Providers;
-using H.Core.Providers.Soil;
+using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Models;
-using H.Core.Providers.Climate;
 
 namespace H.CLI.Test.FilesAndDirectoryAccessors
 {

@@ -1,13 +1,12 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Services.LandManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Services.Animals;
-using H.Core.Services.LandManagement;
-using Moq;
 
 namespace H.Core.Test.Services
 {

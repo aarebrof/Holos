@@ -1,9 +1,9 @@
-﻿using System;
-using H.CLI.UserInput;
-using System.Reflection;
+﻿using H.CLI.UserInput;
 using H.Core.Enumerations;
-using H.Core.Models.Animals.Beef;
 using H.Core.Models;
+using H.Core.Models.Animals.Beef;
+using System;
+using System.Reflection;
 
 namespace H.CLI.TemporaryComponentStorage
 {

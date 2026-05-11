@@ -1,7 +1,6 @@
-﻿using System;
-using H.Core.CustomAttributes;
+﻿using H.Core.CustomAttributes;
 using H.Core.Enumerations;
-using H.Infrastructure;
+using System;
 
 namespace H.Core.Models.LandManagement.Fields
 {

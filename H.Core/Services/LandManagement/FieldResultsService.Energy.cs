@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace H.Core.Services.LandManagement
 {

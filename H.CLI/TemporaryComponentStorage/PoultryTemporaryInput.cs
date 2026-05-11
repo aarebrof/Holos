@@ -1,15 +1,6 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using H.CLI.Interfaces;
-using H.CLI.UserInput;
+﻿using H.CLI.Interfaces;
 using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.Animals.Beef;
+using System.Reflection;
 
 namespace H.CLI.TemporaryComponentStorage
 {

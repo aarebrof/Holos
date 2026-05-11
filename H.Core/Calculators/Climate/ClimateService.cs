@@ -1,10 +1,9 @@
-﻿using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
+﻿using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Services.LandManagement;
-using System.Diagnostics;
 using System;
+using System.Diagnostics;
 using System.Linq;
-using H.Core.Services.Initialization.Climate;
 
 namespace H.Core.Calculators.Climate
 {

@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
-using H.Core.Models.LandManagement.Fields;
+﻿using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Economics;
+using System.ComponentModel;
 
 namespace H.Core.Models.Results
 {

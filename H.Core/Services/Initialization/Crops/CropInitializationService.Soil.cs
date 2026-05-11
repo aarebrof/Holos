@@ -1,7 +1,7 @@
-﻿using System.Linq;
+﻿using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
 using H.Core.Providers.Soil;
+using System.Linq;
 
 namespace H.Core.Services.Initialization.Crops
 {

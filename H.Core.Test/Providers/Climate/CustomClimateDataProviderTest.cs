@@ -1,12 +1,11 @@
 ﻿#region Imports
 
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.IO;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 #endregion
 

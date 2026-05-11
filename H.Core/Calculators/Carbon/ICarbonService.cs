@@ -1,9 +1,7 @@
-﻿using H.Core.Models.LandManagement.Fields;
+﻿using H.Core.Emissions.Results;
 using H.Core.Models;
-using H.Core.Emissions.Results;
+using H.Core.Models.LandManagement.Fields;
 using System.Collections.Generic;
-using System.Windows.Controls;
-using H.Core.Services.LandManagement;
 
 namespace H.Core.Calculators.Carbon
 {

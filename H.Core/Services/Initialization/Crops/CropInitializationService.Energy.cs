@@ -1,5 +1,5 @@
-﻿using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
+﻿using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Energy;
 
 namespace H.Core.Services.Initialization.Crops

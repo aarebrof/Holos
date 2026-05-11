@@ -1,20 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using H.Core.Emissions.Results;
-using H.Core.Enumerations;
-using H.Core.Models;
+﻿using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Dairy;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Feed;
-using H.Core.Providers.Precipitation;
-using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace H.Core.Test.Services
 {

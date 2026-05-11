@@ -1,10 +1,9 @@
 ﻿#region Imports
 
-using System.Collections.Generic;
 using H.Core.Enumerations;
-using H.Core.Providers.Polygon;
 using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 
 #endregion
 

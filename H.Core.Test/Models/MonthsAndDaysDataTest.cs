@@ -1,6 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using H.Core.Models;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using H.Core.Models;
 
 namespace H.Core.Test.Models
 {

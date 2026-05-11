@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Globalization;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Models.Results;
-using H.Core.Providers.Carbon;
+using System.Collections.Generic;
+using System.Globalization;
 
 namespace H.Core.Services.LandManagement
 {

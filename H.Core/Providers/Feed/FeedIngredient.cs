@@ -1,11 +1,11 @@
 ﻿#region Imports
 
-using System;
 using AutoMapper;
 using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using System;
 
 #endregion
 

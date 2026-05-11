@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using H.Core.Models.LandManagement.Shelterbelt;
+﻿using H.Core.Models.LandManagement.Shelterbelt;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Test.Models
 {

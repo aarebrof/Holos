@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using H.Core.Converters;
+﻿using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 using H.Core.Services;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Emissions.Results
 {

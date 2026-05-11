@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing.Design;
-using System.Linq;
-using H.Content;
+﻿using H.Content;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
-using H.Core.Providers.Animals.Table_69;
 using H.Infrastructure;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Providers.Animals.Table_28
 {

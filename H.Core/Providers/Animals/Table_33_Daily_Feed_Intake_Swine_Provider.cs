@@ -1,9 +1,7 @@
-using System.Collections.Generic;
-using System.Linq;
-using H.Content;
 using H.Core.Enumerations;
 using H.Core.Providers.Feed;
 using H.Infrastructure;
+using System.Collections.Generic;
 
 namespace H.Core.Providers.Animals
 {

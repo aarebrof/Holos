@@ -1,8 +1,7 @@
 ﻿using H.Core.Calculators.Nitrogen;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using System;
-using H.Core.Enumerations;
 
 namespace H.Core.Calculators.Carbon
 {

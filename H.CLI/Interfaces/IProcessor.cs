@@ -1,9 +1,5 @@
-﻿using System;
+﻿using H.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Models;
 
 namespace H.CLI.Interfaces
 {

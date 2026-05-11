@@ -1,11 +1,10 @@
-﻿using H.Core.Enumerations;
+﻿using H.Core.Calculators.Carbon;
+using H.Core.Emissions.Results;
+using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using H.Core.Calculators.Carbon;
-using H.Core.Emissions.Results;
-using H.Core.Models;
 
 namespace H.Core.Test.Calculators.Carbon
 {

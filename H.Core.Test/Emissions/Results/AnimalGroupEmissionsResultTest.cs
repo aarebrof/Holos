@@ -1,9 +1,9 @@
 ﻿using H.Core.Emissions.Results;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using H.Core.Models.Animals;
 
 namespace H.Core.Test.Emissions.Results
 {

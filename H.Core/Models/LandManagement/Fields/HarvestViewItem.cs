@@ -1,7 +1,6 @@
-﻿using System;
+﻿using H.Core.Enumerations;
+using System;
 using System.ComponentModel;
-using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core.Models.LandManagement.Fields
 {

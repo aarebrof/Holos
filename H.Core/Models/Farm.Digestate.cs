@@ -1,10 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using H.Core.Enumerations;
-using System.Diagnostics;
+﻿using H.Core.Models.Infrastructure;
 using System.Linq;
-using H.Core.Models.Infrastructure;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Animals;
 
 namespace H.Core.Models
 {

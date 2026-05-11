@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Tools;
-using H.Infrastructure;
+using System.Collections.Generic;
 
 namespace H.Core.Providers.Nitrogen
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using H.CLI.Interfaces;
+﻿using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
+using System;
 
 namespace H.CLI.Factories
 {

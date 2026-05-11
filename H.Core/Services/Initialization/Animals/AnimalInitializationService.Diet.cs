@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Animals
 {

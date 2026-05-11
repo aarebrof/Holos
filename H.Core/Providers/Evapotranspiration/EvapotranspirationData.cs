@@ -1,11 +1,9 @@
 ﻿#region Imports
 
+using H.Core.Enumerations;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using H.Core.Calculators.Climate;
-using H.Core.Enumerations;
-using H.Infrastructure;
 
 #endregion
 

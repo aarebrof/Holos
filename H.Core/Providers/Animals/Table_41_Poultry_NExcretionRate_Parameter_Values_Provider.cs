@@ -1,15 +1,10 @@
-﻿using System;
+﻿using H.Content;
+using H.Core.Converters;
+using H.Core.Enumerations;
+using H.Infrastructure;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Content;
-using H.Core.Converters;
-using H.Core.Enumerations;
-using H.Core.Providers.Climate;
-using H.Core.Providers.Plants;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Animals
 {

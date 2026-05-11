@@ -1,7 +1,7 @@
-﻿using System;
+﻿using H.Core.Models.LandManagement.Fields;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Calculators.Infrastructure
 {

@@ -1,17 +1,14 @@
 ﻿using H.Core.Calculators.Carbon;
-using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Models;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using H.Core.Emissions.Results;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
-using H.Core.Providers.Soil;
-using H.Core.Providers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace H.Core.Test.Calculators.Carbon
 {

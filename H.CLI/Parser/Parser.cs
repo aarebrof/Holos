@@ -1,12 +1,12 @@
-﻿using System;
+﻿using H.CLI.FileAndDirectoryAccessors;
+using H.CLI.Handlers;
+using H.CLI.Interfaces;
+using H.CLI.UserInput;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using H.CLI.FileAndDirectoryAccessors;
-using H.CLI.Handlers;
-using H.CLI.Interfaces;
-using H.CLI.UserInput;
 
 namespace H.CLI.Parser
 {

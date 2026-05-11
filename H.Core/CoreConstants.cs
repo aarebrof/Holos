@@ -1,10 +1,7 @@
 ﻿#region Imports
 
-using System;
-using System.Security.RightsManagement;
-using System.Transactions;
 using H.Core.Properties;
-using H.Infrastructure;
+using System;
 
 #endregion
 
@@ -61,7 +58,7 @@ namespace H.Core
 
         static CoreConstants()
         {
-            DefaultMaximumYear = DateTime.Now.Year; 
+            DefaultMaximumYear = DateTime.Now.Year;
         }
 
         #endregion

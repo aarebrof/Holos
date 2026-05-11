@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using AutoMapper;
+﻿using AutoMapper;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
-using H.Core.Services.LandManagement;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Services.Animals
 {

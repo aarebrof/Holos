@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Infrastructure;
+using System.Collections.Generic;
 
 namespace H.Core.Services
 {

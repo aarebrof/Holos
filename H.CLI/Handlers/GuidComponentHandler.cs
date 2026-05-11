@@ -1,6 +1,6 @@
-﻿using System;
+﻿using H.CLI.Interfaces;
+using System;
 using System.Collections.Generic;
-using H.CLI.Interfaces;
 
 namespace H.CLI.Handlers
 {

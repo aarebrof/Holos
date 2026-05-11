@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading;
-using H.Content;
+﻿using H.Content;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
+using System.Linq;
+using System.Text;
 
 namespace H.Core.Test.Providers.Climate
 {

@@ -1,9 +1,8 @@
-﻿using System;
-using System.ComponentModel;
-using H.Core.CustomAttributes;
+﻿using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Providers.Fertilizer;
 using H.Infrastructure;
+using System.ComponentModel;
 
 namespace H.Core.Models.LandManagement.Fields
 {

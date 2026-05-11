@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Soil;
+using System.Collections.Generic;
 
 namespace H.Core.Services.LandManagement.Soil
 {

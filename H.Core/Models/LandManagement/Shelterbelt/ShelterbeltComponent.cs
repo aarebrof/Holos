@@ -1,9 +1,9 @@
 ﻿#region Imports
 
+using H.Core.Enumerations;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using H.Core.Enumerations;
 
 #endregion
 

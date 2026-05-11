@@ -1,14 +1,13 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using AutoMapper;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Animals.Beef;
 using H.Core.Providers.Feed;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 

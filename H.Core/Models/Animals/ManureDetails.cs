@@ -1,10 +1,9 @@
-﻿using System.ComponentModel;
-using System.Diagnostics;
-using AutoMapper;
+﻿using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Infrastructure;
+using System.ComponentModel;
 
 namespace H.Core.Models.Animals
 {

@@ -1,14 +1,13 @@
 ﻿#region Imports
 
-using System;
-using System.IO;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Providers;
 using H.Core.Providers.Climate;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 #endregion
 

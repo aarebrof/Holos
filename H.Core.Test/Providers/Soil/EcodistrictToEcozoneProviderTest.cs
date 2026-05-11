@@ -1,10 +1,9 @@
-﻿using System;
-using H.Core.Enumerations;
-using H.Core.Providers.Polygon;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Reflection;
+using System;
 using System.Collections;
+using System.Reflection;
 
 namespace H.Core.Test.Providers.Soil
 {

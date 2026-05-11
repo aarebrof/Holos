@@ -47,28 +47,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.OracleClient" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Security" />
-    <Reference Include="System.ServiceProcess" />
-    <Reference Include="System.Transactions" />
-    <Reference Include="System.Xaml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
@@ -144,7 +125,6 @@
     <Compile Include="Converters\PastureTypeStringConverter.cs" />
     <Compile Include="Converters\PerennialCroppingChangeTypeStringConverter.cs" />
     <Compile Include="Converters\ProductionStageStringConverter.cs" />
-    <Compile Include="Converters\ResponseToVisibilityConverter.cs" />
     <Compile Include="Converters\ShelterbeltEnabledFromHardinessZoneConverter.cs" />
     <Compile Include="Converters\SoilFunctionalCategoryStringConverter.cs" />
     <Compile Include="Converters\TillagePracticeChangeTypeStringConverter.cs" />
@@ -749,7 +729,6 @@
     <Compile Include="Services\LandManagement\Shelterbelts\ShelterbeltComponentHelper.cs" />
     <Compile Include="Services\TimePeriodHelper.cs" />
     <Compile Include="Storage.cs" />
-    <Compile Include="Tools\FileTraceListener.cs" />
     <Compile Include="Tools\HTraceListener.cs" />
   </ItemGroup>
   <ItemGroup>

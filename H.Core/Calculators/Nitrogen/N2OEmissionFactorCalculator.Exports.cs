@@ -1,9 +1,9 @@
-﻿using H.Core.Models;
-using System;
-using System.Linq;
+﻿using H.Core.Enumerations;
+using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Enumerations;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Calculators.Nitrogen
 {

@@ -1,6 +1,6 @@
-﻿using System.Diagnostics;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Infrastructure;
+using System.Diagnostics;
 
 namespace H.Core.Enumerations
 {

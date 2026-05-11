@@ -1,22 +1,19 @@
-﻿using System;
+﻿using H.Core.Calculators.Infrastructure;
+using H.Core.Calculators.UnitsOfMeasurement;
+using H.Core.Converters;
+using H.Core.Enumerations;
+using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
+using H.Core.Models.Results;
+using H.Core.Services.LandManagement;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using H.Core.Calculators.Infrastructure;
-using H.Core.Calculators.UnitsOfMeasurement;
-using H.Core.Converters;
-using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.Animals;
-using H.Core.Models.LandManagement.Fields;
-using H.Core.Models.Results;
-using H.Core.Providers.Climate;
-using H.Core.Services.LandManagement;
 
 namespace H.Core.Emissions.Results
 {

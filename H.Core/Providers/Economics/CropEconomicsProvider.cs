@@ -1,14 +1,12 @@
-﻿using System;
-using System.Globalization;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Windows.Media.Animation;
+﻿using AutoMapper;
 using H.Content;
 using H.Core.Converters;
 using H.Core.Enumerations;
 using H.Infrastructure;
-using AutoMapper;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
+using System.Linq;
 
 namespace H.Core.Providers.Economics
 {

@@ -1,12 +1,10 @@
-﻿using System;
+﻿using H.Core.Tools;
+using H.Infrastructure;
+using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using H.Core.Models;
-using H.Core.Tools;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Climate
 {

@@ -1,7 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Economics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Models.LandManagement.Fields
 {

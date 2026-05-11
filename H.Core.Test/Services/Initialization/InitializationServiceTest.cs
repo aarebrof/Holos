@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
@@ -17,6 +13,10 @@ using H.Core.Providers.Climate;
 using H.Core.Providers.Fertilizer;
 using H.Core.Services.Initialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace H.Core.Test.Services.Initialization
 {

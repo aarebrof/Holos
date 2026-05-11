@@ -1,10 +1,9 @@
-﻿using System;
+﻿using H.Core.CustomAttributes;
+using H.Core.Enumerations;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Linq;
-using H.Core.CustomAttributes;
-using H.Core.Enumerations;
 
 namespace H.Core.Models.LandManagement.Fields
 {

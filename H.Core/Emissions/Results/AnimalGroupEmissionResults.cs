@@ -1,10 +1,9 @@
-﻿using System;
+﻿using H.Core.Converters;
+using H.Core.Enumerations;
+using H.Core.Models.Animals;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using H.Core.Converters;
-using H.Core.Enumerations;
-using H.Core.Models;
-using H.Core.Models.Animals;
 
 namespace H.Core.Emissions.Results
 {

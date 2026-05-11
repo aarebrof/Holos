@@ -1,22 +1,18 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Calculators.Economics;
+﻿using H.Core.Calculators.Economics;
+using H.Core.Emissions.Results;
 using H.Core.Enumerations;
-using H.Core.Providers.Economics;
-using System.Text;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using System.Globalization;
-using System.IO;
-using System.Linq;
+using H.Core.Models.Results;
+using H.Core.Providers.Economics;
+using H.Core.Services.LandManagement;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Runtime.InteropServices;
-using H.Core.Emissions.Results;
-using H.Core.Models.Results;
-using H.Core.Services;
-using H.Core.Services.LandManagement;
-using Moq;
+using System.IO;
+using System.Linq;
 
 namespace H.Core.Test.Calculators.Economics
 {

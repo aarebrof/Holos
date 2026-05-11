@@ -1,6 +1,6 @@
-﻿using System;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
+using System;
 
 namespace H.Core.Calculators.Nitrogen
 {

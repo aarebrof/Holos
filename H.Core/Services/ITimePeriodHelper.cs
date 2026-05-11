@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
+using System;
+using System.Collections.Generic;
 
 namespace H.Core.Services
 {

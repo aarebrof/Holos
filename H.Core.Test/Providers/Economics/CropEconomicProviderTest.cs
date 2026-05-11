@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Economics;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Test.Providers.Economics
 {

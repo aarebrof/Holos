@@ -1,17 +1,11 @@
-﻿using H.CLI.Interfaces;
+﻿using H.CLI.ComponentKeys;
+using H.CLI.Interfaces;
 using H.CLI.TemporaryComponentStorage;
-using H.Core.Enumerations;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.CLI.UserInput;
 using H.Core.Models;
 using H.Core.Models.Animals;
+using System.Collections.Generic;
 using System.Globalization;
-using H.CLI.ComponentKeys;
 
 namespace H.CLI.Converters
 {

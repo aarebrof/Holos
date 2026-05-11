@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using H.Core.Models.LandManagement.Fields;
+using System.Collections.Generic;
 using System.Linq;
-using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Enumerations
 {

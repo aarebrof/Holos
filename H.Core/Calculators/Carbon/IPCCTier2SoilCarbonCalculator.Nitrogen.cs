@@ -1,9 +1,6 @@
 ﻿using H.Core.Calculators.Nitrogen;
-using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
-using H.Core.Providers.Soil;
-using H.Core.Services.LandManagement;
+using H.Core.Models.LandManagement.Fields;
 
 namespace H.Core.Calculators.Carbon
 {

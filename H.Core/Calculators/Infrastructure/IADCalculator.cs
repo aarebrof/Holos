@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
 using H.Core.Models;
+using System.Collections.Generic;
 
 namespace H.Core.Calculators.Infrastructure
 {

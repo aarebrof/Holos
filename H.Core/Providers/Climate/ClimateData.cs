@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Data;
-using System.Globalization;
-using System.Linq;
-using System.Windows.Input;
-using H.Core.Enumerations;
-using H.Core.Models;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Temperature;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data;
+using System.Linq;
 
 namespace H.Core.Providers.Climate
 {

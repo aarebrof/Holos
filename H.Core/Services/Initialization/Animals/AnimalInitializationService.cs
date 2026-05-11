@@ -1,9 +1,8 @@
-﻿using H.Core.Providers.Animals;
-using H.Core.Providers.Climate;
-using System.Collections.Generic;
+﻿using AutoMapper;
 using H.Core.Calculators.Nitrogen;
 using H.Core.Models;
-using AutoMapper;
+using H.Core.Providers.Animals;
+using H.Core.Providers.Climate;
 
 namespace H.Core.Services.Initialization.Animals
 {

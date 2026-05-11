@@ -1,11 +1,8 @@
-﻿using System;
-using System.IO;
+﻿using H.CLI.Factories;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using H.CLI.Interfaces;
-using H.CLI.Factories;
 using System.Text.RegularExpressions;
 
 namespace H.CLI.FileAndDirectoryAccessors

@@ -1,5 +1,5 @@
-﻿using System;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
+using System;
 
 namespace H.Core.Models.LandManagement.Fields
 {

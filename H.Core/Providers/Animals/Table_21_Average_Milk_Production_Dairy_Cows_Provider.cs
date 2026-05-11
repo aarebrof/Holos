@@ -1,14 +1,11 @@
-﻿using System;
+﻿using H.Content;
+using H.Core.Converters;
+using H.Core.Enumerations;
+using H.Infrastructure;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Globalization;
-using H.Core.Enumerations;
-using H.Core.Converters;
-using H.Infrastructure;
-using H.Content;
+using System.Linq;
 
 
 namespace H.Core.Providers.Animals

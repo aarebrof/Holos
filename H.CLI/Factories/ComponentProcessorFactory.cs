@@ -1,17 +1,7 @@
 ﻿using H.CLI.Interfaces;
 using H.CLI.Processors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using H.Core.Services.LandManagement;
-using H.Core.Calculators.Carbon;
-using H.Core.Calculators.Nitrogen;
-using H.Core.Providers;
-using H.Core.Providers.Climate;
-using H.Core.Services;
-using H.Core.Services.Initialization;
+using System;
 
 namespace H.CLI.Factories
 {

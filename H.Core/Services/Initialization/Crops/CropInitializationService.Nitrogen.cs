@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Providers.Nitrogen;
+using H.Core.Models.LandManagement.Fields;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Crops
 {

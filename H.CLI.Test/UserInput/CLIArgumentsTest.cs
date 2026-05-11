@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using H.CLI.UserInput;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using H.CLI.UserInput;
+using System;
 
 namespace H.CLI.Test.UserInput
 {

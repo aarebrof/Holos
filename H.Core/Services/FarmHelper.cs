@@ -1,11 +1,9 @@
 ﻿using H.Core.Models;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Feed;
+using H.Core.Services.Initialization;
 using System;
 using System.Collections.ObjectModel;
-using H.Core.Services.Initialization;
-using AutoMapper;
-using System.Collections.Generic;
 
 namespace H.Core.Services
 {

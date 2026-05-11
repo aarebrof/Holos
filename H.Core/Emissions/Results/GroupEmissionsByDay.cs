@@ -1,7 +1,5 @@
-﻿using System;
-using System.Configuration;
-using H.Core.Providers.Animals;
-using H.Infrastructure;
+﻿using H.Infrastructure;
+using System;
 
 namespace H.Core.Emissions.Results
 {

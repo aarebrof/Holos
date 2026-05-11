@@ -1,10 +1,8 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models.Animals;
 using H.Core.Models;
+using H.Core.Models.Animals;
 using System;
 using System.ComponentModel;
-using System.Linq;
-using H.Core.Models.Animals.Beef;
 
 namespace H.Core.Services.Animals
 {

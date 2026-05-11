@@ -1,66 +1,63 @@
-﻿using System.Diagnostics;
-using System.Linq;
-using System.Windows.Interactivity;
-using H.Core.Enumerations;
-using H.Core.Models.Animals;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Providers.Animals;
+using H.Core.Models.Animals;
+using System.Diagnostics;
 
 namespace H.Core.Services.Initialization.Animals
 {
     public partial class AnimalInitializationService
     {
-		#region Public Methods
+        #region Public Methods
 
-		/// <summary>
-		/// Initialize the default emission factors for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
-		/// </summary>
-		/// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
-		public void InitializeDefaultEmissionFactors(Farm farm)
-		{
-			if (farm != null)
-			{
-				foreach (var managementPeriod in farm.GetAllManagementPeriods())
-				{
-					this.InitializeDefaultEmissionFactors(farm, managementPeriod);
-				}
-			}
-		}
+        /// <summary>
+        /// Initialize the default emission factors for all <see cref="ManagementPeriod"/>s associated with this <see cref="Farm"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> that will be reinitialized to new default values</param>
+        public void InitializeDefaultEmissionFactors(Farm farm)
+        {
+            if (farm != null)
+            {
+                foreach (var managementPeriod in farm.GetAllManagementPeriods())
+                {
+                    this.InitializeDefaultEmissionFactors(farm, managementPeriod);
+                }
+            }
+        }
 
-		/// <summary>
-		/// Initialize the default emission factors for the <see cref="ManagementPeriod"/>.
-		/// </summary>
-		/// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/></param>
-		/// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
-		public void InitializeDefaultEmissionFactors(
-			Farm farm,
-			ManagementPeriod managementPeriod)
-		{
-			if (farm != null &&
-				managementPeriod != null)
+        /// <summary>
+        /// Initialize the default emission factors for the <see cref="ManagementPeriod"/>.
+        /// </summary>
+        /// <param name="farm">The <see cref="Farm"/> containing the <see cref="ManagementPeriod"/></param>
+        /// <param name="managementPeriod">The <see cref="ManagementPeriod"/> that will be reinitialized to new default values</param>
+        public void InitializeDefaultEmissionFactors(
+            Farm farm,
+            ManagementPeriod managementPeriod)
+        {
+            if (farm != null &&
+                managementPeriod != null)
             {
                 var year = managementPeriod.Start.Date.Year;
 
                 var precipitation = farm.GetAnnualPrecipitation(year);
                 var evapotranspiration = farm.GetAnnualEvapotranspiration(year);
-                
-				var emissionData = _livestockEmissionConversionFactorsProvider.GetFactors(
-                    manureStateType: managementPeriod.ManureDetails.StateType,
-					meanAnnualPrecipitation: precipitation,
-					meanAnnualTemperature: farm.ClimateData.TemperatureData.GetMeanAnnualTemperature(),
-					meanAnnualEvapotranspiration: evapotranspiration,
-					beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
-					animalType: managementPeriod.AnimalType,
-					farm: farm,
-					year: year);
 
-				managementPeriod.ManureDetails.MethaneConversionFactor = emissionData.MethaneConversionFactor;
-				managementPeriod.ManureDetails.N2ODirectEmissionFactor = emissionData.N20DirectEmissionFactor;
-				managementPeriod.ManureDetails.VolatilizationFraction = emissionData.VolatilizationFraction;
-				managementPeriod.ManureDetails.EmissionFactorVolatilization = emissionData.EmissionFactorVolatilization;
-				managementPeriod.ManureDetails.EmissionFactorLeaching = emissionData.EmissionFactorLeach;
-			}
-		}
+                var emissionData = _livestockEmissionConversionFactorsProvider.GetFactors(
+                    manureStateType: managementPeriod.ManureDetails.StateType,
+                    meanAnnualPrecipitation: precipitation,
+                    meanAnnualTemperature: farm.ClimateData.TemperatureData.GetMeanAnnualTemperature(),
+                    meanAnnualEvapotranspiration: evapotranspiration,
+                    beddingRate: managementPeriod.HousingDetails.UserDefinedBeddingRate,
+                    animalType: managementPeriod.AnimalType,
+                    farm: farm,
+                    year: year);
+
+                managementPeriod.ManureDetails.MethaneConversionFactor = emissionData.MethaneConversionFactor;
+                managementPeriod.ManureDetails.N2ODirectEmissionFactor = emissionData.N20DirectEmissionFactor;
+                managementPeriod.ManureDetails.VolatilizationFraction = emissionData.VolatilizationFraction;
+                managementPeriod.ManureDetails.EmissionFactorVolatilization = emissionData.EmissionFactorVolatilization;
+                managementPeriod.ManureDetails.EmissionFactorLeaching = emissionData.EmissionFactorLeach;
+            }
+        }
 
         /// <summary>
         /// Reinitialize the Beef_Dairy_Cattle_Feeding_Activity_Coefficient object
@@ -139,7 +136,7 @@ namespace H.Core.Services.Initialization.Animals
 
         public void InitializeGainCoefficient(ManagementPeriod managementPeriod)
         {
-            if (managementPeriod != null )
+            if (managementPeriod != null)
             {
                 if (managementPeriod.AnimalType.IsBeefCattleType() || managementPeriod.AnimalType.IsDairyCattleType())
                 {

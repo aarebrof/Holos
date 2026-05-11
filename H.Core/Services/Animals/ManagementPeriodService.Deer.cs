@@ -1,5 +1,5 @@
-﻿using H.Core.Models.Animals;
-using H.Core.Models;
+﻿using H.Core.Models;
+using H.Core.Models.Animals;
 using System.ComponentModel;
 
 namespace H.Core.Services.Animals

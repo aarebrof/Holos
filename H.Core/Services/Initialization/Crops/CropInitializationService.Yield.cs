@@ -1,14 +1,13 @@
 ﻿using H.Core.Enumerations;
-using H.Core.Models.LandManagement.Fields;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Soil;
 using H.Core.Services.LandManagement;
+using H.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System;
-using System.Drawing.Design;
 using System.Linq;
-using H.Infrastructure;
 
 namespace H.Core.Services.Initialization.Crops
 {

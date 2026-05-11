@@ -1,9 +1,6 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Climate;
-using H.Core.Enumerations;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace H.Core.Test.Providers.Climate
 {

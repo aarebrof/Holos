@@ -1,9 +1,7 @@
-﻿using System;
+﻿using H.Core.Models;
+using H.Core.Models.Animals;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using H.Core.Models;
-using H.Core.Models.Animals;
 
 namespace H.Core.Emissions.Results
 {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.ObjectModel;
 
 namespace H.Core.Test.Models.Animals.Beef
 {

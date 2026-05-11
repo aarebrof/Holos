@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using AutoMapper;
-using H.Core.Models.LandManagement.Fields;
+﻿using AutoMapper;
 using H.Core.Models;
+using H.Core.Models.LandManagement.Fields;
+using System.Linq;
 
 namespace H.Core.Services.Initialization.Crops
 {

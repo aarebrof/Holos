@@ -47,38 +47,9 @@
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
-    <Reference Include="System.Configuration" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\LICENSE" Pack="true" PackagePath="" />
-    <Compile Include="Controls\TreeHelper.cs" />
-    <Compile Include="Controls\ValueConverters\BooleanToHeightConverter.cs" />
-    <Compile Include="Controls\ValueConverters\BooleanToOpacityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\BooleanToVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\BoolRadioConverter.cs" />
-    <Compile Include="Controls\ValueConverters\DebugDataBindingConverter.cs" />
-    <Compile Include="Controls\ValueConverters\EmptyStringToBooleanConverter.cs" />
-    <Compile Include="Controls\ValueConverters\EmptyStringToVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\EnumDescriptionConverter.cs" />
-    <Compile Include="Controls\ValueConverters\InvertableBooleanConverter.cs" />
-    <Compile Include="Controls\ValueConverters\InvertibleBooleanToVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\InvertedVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\NotificationsFilterOnScopeConverter.cs" />
-    <Compile Include="Controls\ValueConverters\NullToVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\ObjectToTypeStringConverter.cs" />
-    <Compile Include="Controls\ValueConverters\EmptyCollectionToVisibilityConverter.cs" />
-    <Compile Include="Controls\ValueConverters\ToLowerStringConverter.cs" />
-    <Compile Include="Controls\ValueConverters\VisibilityToSharedSizeGroupConverter.cs" />
     <Compile Include="Csv.cs" />
     <Compile Include="CsvReader.cs" />
     <Compile Include="EnumHelper.cs" />

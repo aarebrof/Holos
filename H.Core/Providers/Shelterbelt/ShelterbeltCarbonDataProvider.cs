@@ -1,12 +1,10 @@
-﻿using System;
+﻿using H.Content;
+using H.Core.Enumerations;
+using H.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using H.Content;
-using H.Core.Calculators.Shelterbelt;
-using H.Core.Enumerations;
-using H.Infrastructure;
 
 namespace H.Core.Providers.Shelterbelt
 {

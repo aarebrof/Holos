@@ -1,8 +1,5 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using H.Core.Calculators.Carbon;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
@@ -11,10 +8,11 @@ using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
-using H.Core.Providers.Evapotranspiration;
-using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 #endregion
 

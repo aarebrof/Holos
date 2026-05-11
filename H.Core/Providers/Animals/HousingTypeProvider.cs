@@ -1,6 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Windows.Navigation;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
+using System.Collections.Generic;
 
 namespace H.Core.Providers.Animals
 {

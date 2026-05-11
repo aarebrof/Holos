@@ -1,11 +1,11 @@
 ﻿#region Imports
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 #endregion
 

@@ -1,6 +1,6 @@
-﻿using System;
-using H.CLI.ComponentKeys;
+﻿using H.CLI.ComponentKeys;
 using H.CLI.Interfaces;
+using System;
 
 namespace H.CLI.Factories
 {

@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
-using H.Core.CustomAttributes;
+﻿using H.Core.CustomAttributes;
 using H.Core.Enumerations;
-using H.Infrastructure;
+using System.Collections.ObjectModel;
 
 namespace H.Core.Models.Infrastructure
 {

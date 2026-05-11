@@ -9,7 +9,6 @@ using H.Core.Emissions;
 using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
-using H.Core.Providers.Climate;
 using H.Core.Services;
 using H.Core.Services.Animals;
 using H.Core.Services.Initialization;

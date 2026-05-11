@@ -1,12 +1,10 @@
-﻿using H.Core.Services.LandManagement;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using H.Core.Models;
+﻿using H.Core.Models;
 using H.Core.Providers;
 using H.Core.Providers.Soil;
 using H.Core.Services.LandManagement.Soil;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
+using System.Collections.Generic;
 
 namespace H.Core.Test.Services.LandManagement.Soil
 {

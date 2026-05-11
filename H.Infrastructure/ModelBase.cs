@@ -1,6 +1,5 @@
-﻿using System;
-using System.ComponentModel;
-using Prism.Mvvm;
+﻿using Prism.Mvvm;
+using System;
 
 namespace H.Infrastructure
 {

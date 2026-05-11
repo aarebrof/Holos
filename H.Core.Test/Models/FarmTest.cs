@@ -1,9 +1,8 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.LandManagement.Fields;
-using H.Core.Providers.Animals;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace H.Core.Test.Models
 {

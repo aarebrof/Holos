@@ -1,6 +1,5 @@
-﻿using System;
+﻿using H.Core.Enumerations;
 using System.Diagnostics;
-using H.Core.Enumerations;
 
 namespace H.Core.Providers.Animals
 {

@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
-using System.Text.RegularExpressions;
-using System.Windows.Navigation;
-using AutoMapper;
-using AutoMapper.Execution;
+﻿using AutoMapper;
 using H.Core.Calculators.Economics;
 using H.Core.Calculators.Infrastructure;
 using H.Core.Calculators.Nitrogen;
-using H.Core.Calculators.UnitsOfMeasurement;
 using H.Core.Emissions.Results;
-using H.Core.Enumerations;
 using H.Core.Events;
 using H.Core.Models;
 using H.Core.Models.Animals;
-using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Models.Results;
 using H.Core.Providers;
@@ -29,10 +17,13 @@ using H.Core.Providers.Precipitation;
 using H.Core.Providers.Soil;
 using H.Core.Providers.Temperature;
 using H.Core.Services.Animals;
-using H.Core.Services.Initialization;
 using H.Core.Services.LandManagement;
-using H.Infrastructure;
 using Prism.Events;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Linq;
 
 namespace H.Core.Services
 {

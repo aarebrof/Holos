@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Providers.Animals;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Soil;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Initialization.Animals
 {

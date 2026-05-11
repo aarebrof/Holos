@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using H.Core.Models.Results;
+using System.Collections.Generic;
 using System.Linq;
-using H.Core.Models.Results;
 
 namespace H.Core.Models.LandManagement.Fields
 {

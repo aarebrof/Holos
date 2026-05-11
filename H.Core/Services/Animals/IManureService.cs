@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using H.Core.Emissions.Results;
+﻿using H.Core.Emissions.Results;
 using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Infrastructure;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Providers.Animals;
+using System;
+using System.Collections.Generic;
 
 namespace H.Core.Services.Animals
 {

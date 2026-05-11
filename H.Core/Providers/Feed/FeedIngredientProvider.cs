@@ -1,14 +1,14 @@
 ﻿#region Imports
 
+using AutoMapper;
+using H.Content;
+using H.Core.Converters;
+using H.Core.Enumerations;
+using H.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using H.Content;
-using H.Core.Converters;
-using H.Infrastructure;
 using System.Linq;
-using AutoMapper;
-using H.Core.Enumerations;
 
 #endregion
 

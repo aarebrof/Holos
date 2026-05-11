@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using H.Core.Enumerations;
-using H.Core.Providers;
+﻿using H.Core.Enumerations;
 using H.Core.Providers.Climate;
 using H.Core.Providers.Evapotranspiration;
 using H.Core.Providers.Precipitation;
 using H.Core.Providers.Temperature;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace H.Core.Calculators.Climate
 {

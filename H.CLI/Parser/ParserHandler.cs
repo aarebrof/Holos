@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using H.CLI.Factories;
+﻿using H.CLI.Factories;
 using H.CLI.Interfaces;
+using System.Collections.Generic;
 
 namespace H.CLI.Parser
 {

@@ -1,10 +1,9 @@
-﻿using System;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
+using H.Core.Tools;
+using H.Infrastructure;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using H.Infrastructure;
-using H.Core.Tools;
 
 namespace H.Core.Providers.Animals
 {

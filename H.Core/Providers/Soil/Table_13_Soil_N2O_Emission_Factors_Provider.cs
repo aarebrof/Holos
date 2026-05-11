@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using H.Core.Enumerations;
+﻿using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Core.Tools;
+using System.Diagnostics;
 
 namespace H.Core.Providers.Soil
 {

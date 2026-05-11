@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using H.Core.Emissions;
+﻿using H.Core.Emissions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
 
 namespace H.Core.Test.Calculators.Emissions
 {

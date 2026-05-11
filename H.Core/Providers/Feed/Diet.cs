@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
-using System.Transactions;
-using AutoMapper;
+﻿using AutoMapper;
 using H.Core.Converters;
 using H.Core.CustomAttributes;
 using H.Core.Enumerations;
 using H.Core.Properties;
 using H.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Linq;
 
 namespace H.Core.Providers.Feed
 {

@@ -1,16 +1,9 @@
 ﻿#region Imports
 
-using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Windows.Data;
 using H.Core.Enumerations;
 using H.Core.Models.LandManagement.Fields;
 using H.Infrastructure;
+using System.Collections.ObjectModel;
 
 #endregion
 
