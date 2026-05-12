@@ -4,7 +4,6 @@ using H.Core.Enumerations;
 using H.Core.Models;
 using H.Core.Models.Animals;
 using H.Core.Models.Animals.Beef;
-using H.Core.Providers;
 using H.Core.Providers.Feed;
 using H.Core.Services.Animals;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -65,19 +64,19 @@ namespace H.Core.Test.Services
             var cowGroup = new AnimalGroup()
             {
                 GroupType = AnimalType.BeefCow,
-                ManagementPeriods = new ObservableCollection<ManagementPeriod>() {managementPeriod},
+                ManagementPeriods = new ObservableCollection<ManagementPeriod>() { managementPeriod },
             };
 
             var cowCalfComponent = new CowCalfComponent()
             {
                 IsInitialized = true,
-                Groups = new ObservableCollection<AnimalGroup>() {cowGroup}
+                Groups = new ObservableCollection<AnimalGroup>() { cowGroup }
             };
 
             var farm = new Farm();
 
             var result = _resultsService.CalculateResultsForComponent(
-                animalComponent: cowCalfComponent, 
+                animalComponent: cowCalfComponent,
                 farm: farm);
 
             Assert.AreEqual(1, result.Count);
@@ -174,28 +173,28 @@ namespace H.Core.Test.Services
             {
                 Name = "BeefFinishingHeiferGroup1",
                 GroupType = AnimalType.BeefFinishingHeifer,
-                ManagementPeriods = new ObservableCollection<ManagementPeriod>() { managementPeriod}
+                ManagementPeriods = new ObservableCollection<ManagementPeriod>() { managementPeriod }
             };
 
-            var storage = new Storage()
-            {
-                ApplicationData = new ApplicationData(),
-            };
-            var geographicData = new GeographicData();            
-            storage.ApplicationData.GlobalSettings.ActiveFarm = new Farm();
-            storage.ApplicationData.GlobalSettings.ActiveFarm.Defaults = new Defaults();
-            storage.ApplicationData.GlobalSettings.ActiveFarm.GeographicData = geographicData;
-            
-            var beefHelper = new BeefCattleResultsService(); 
+            //var storage = new Storage()
+            //{
+            //    ApplicationData = new ApplicationData(),
+            //};
+            //var geographicData = new GeographicData();            
+            //storage.ApplicationData.GlobalSettings.ActiveFarm = new Farm();
+            //storage.ApplicationData.GlobalSettings.ActiveFarm.Defaults = new Defaults();
+            //storage.ApplicationData.GlobalSettings.ActiveFarm.GeographicData = geographicData;
+
+            var beefHelper = new BeefCattleResultsService();
             //var result = beefHelper.GetEmissionsForGroup(beefGroup, storage.ApplicationData.GlobalSettings.ActiveFarm);
-          //  Assert.AreEqual(result.AnimalGroup.Guid, beefGroup.Guid);
+            //  Assert.AreEqual(result.AnimalGroup.Guid, beefGroup.Guid);
             //var groupMonthlyEmissions = result.GroupEmissionsByMonths;
 
             //Duration is three months => 3 monthly emissions for the beef group
             //Assert.AreEqual(groupMonthlyEmissions.Count(), 3);
 
             //Get first monthly emission
-           // var firstMonthlyEmission = groupMonthlyEmissions[0];
+            // var firstMonthlyEmission = groupMonthlyEmissions[0];
 
             // First Monthly Emission Calculations
             var roundingDigits = 2;
@@ -207,7 +206,7 @@ namespace H.Core.Test.Services
             ////Leaching Fraction is 0 for a Beef Heifer therefore, the calculated value will be multiplied by 0
             //Assert.AreEqual(Math.Round(firstMonthlyEmission.ManureLeachingNitrogenEmission, roundingDigits), 0);
             //Assert.AreEqual(Math.Round(firstMonthlyEmission.ManureVolatilizationNitrogenEmission, roundingDigits), -4.68);
-       
+
             ////Leaching Fraction is 0 for a Beef Heifer therefore, the calculated value will be multiplied by 0
             //Assert.AreEqual(Math.Round(firstMonthlyEmission.ManureAvailableForLandApplication, roundingDigits), 0);
         }
@@ -373,7 +372,7 @@ namespace H.Core.Test.Services
         {
             var entericMethaneEmissionRate = 10;
             var numberOfCattle = 30;
-            
+
             var result =
                 _resultsService.CalculateEntericMethaneEmissions(entericMethaneEmissionRate, numberOfCattle);
             Assert.AreEqual(300, result);

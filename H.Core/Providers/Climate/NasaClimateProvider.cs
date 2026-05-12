@@ -1,11 +1,11 @@
 ﻿using H.Core.Calculators.Climate;
 using H.Core.Tools;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using TimeSpan = System.TimeSpan;
@@ -116,39 +116,41 @@ namespace H.Core.Providers.Climate
 
             Trace.TraceInformation($"{nameof(NasaClimateProvider)}: Processing data received from NASA API.");
 
-            JObject jObject = JObject.Parse(content);
+            using var jDocument = JsonDocument.Parse(content, new JsonDocumentOptions() { AllowTrailingCommas = true });
+            var root = jDocument.RootElement;
 
-            var featuresValueArray = (JObject)jObject["properties"];
-            if (featuresValueArray == null)
+            if (!root.TryGetProperty("properties", out var featuresValueArray))
             {
                 // This can occur when NASA takes the API offline for maintenance
                 Trace.TraceInformation($"{nameof(NasaClimateProvider)}: there was an error while trying to download NASA climate data");
                 return new List<DailyClimateData>();
             }
 
+            var parameters = featuresValueArray.GetProperty("parameter");
+
             // Precipitation and its enumerator to access the next data
-            var rain = (JObject)featuresValueArray["parameter"]["PRECTOTCORR"];
-            var rainE = rain.GetEnumerator();
+            var rain = parameters.GetProperty("PRECTOTCORR");
+            var rainE = rain.EnumerateObject().GetEnumerator();
 
             // Temperature and its enumerator to access the next data
-            var temperature = (JObject)featuresValueArray["parameter"]["T2M"];
-            var temperatureE = temperature.GetEnumerator();
+            var temperature = parameters.GetProperty("T2M");
+            var temperatureE = temperature.EnumerateObject().GetEnumerator();
 
             // Humidity and its enumerator to access the next data
-            var relativeHumidity = (JObject)featuresValueArray["parameter"]["RH2M"];
-            var relativeHumidityE = relativeHumidity.GetEnumerator();
+            var relativeHumidity = parameters.GetProperty("RH2M");
+            var relativeHumidityE = relativeHumidity.EnumerateObject().GetEnumerator();
 
             // Radiation and its enumerator to access the next data
-            var solarRadiation = (JObject)featuresValueArray["parameter"]["ALLSKY_SFC_SW_DWN"];
-            var solarRadiationE = solarRadiation.GetEnumerator();
+            var solarRadiation = parameters.GetProperty("ALLSKY_SFC_SW_DWN");
+            var solarRadiationE = solarRadiation.EnumerateObject().GetEnumerator();
 
             // Minimum temperature and its enumerator to access the next data
-            var minimumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MIN"];
-            var minimumTemperatureE = minimumTemperature.GetEnumerator();
+            var minimumTemperature = parameters.GetProperty("T2M_MIN");
+            var minimumTemperatureE = minimumTemperature.EnumerateObject().GetEnumerator();
 
             // Maximum temperature and its enumerator to access the next data
-            var maximumTemperature = (JObject)featuresValueArray["parameter"]["T2M_MAX"];
-            var maximumTemperatureE = maximumTemperature.GetEnumerator();
+            var maximumTemperature = parameters.GetProperty("T2M_MAX");
+            var maximumTemperatureE = maximumTemperature.EnumerateObject().GetEnumerator();
 
             // Creating a temp file for the NASA data
 
@@ -156,27 +158,27 @@ namespace H.Core.Providers.Climate
 
             // NOTE: NASA API does not provide evapotranspiration - this needs to be calculated by caller
             int julian = 1;
-            while (rainE.MoveNext() && 
-                   temperatureE.MoveNext() && 
-                   relativeHumidityE.MoveNext() && 
+            while (rainE.MoveNext() &&
+                   temperatureE.MoveNext() &&
+                   relativeHumidityE.MoveNext() &&
                    solarRadiationE.MoveNext() &&
                    minimumTemperatureE.MoveNext() &&
                    maximumTemperatureE.MoveNext())
             {
                 var data = new DailyClimateData();
-                if (rainE.Current.Key.Substring(4, 4) == "0101")
+                if (rainE.Current.Name.Substring(4, 4) == "0101")
                 {
                     julian = 1;
                     data.JulianDay = julian;
                 }
 
-                data.Year = int.Parse(rainE.Current.Key.Substring(0, 4));
-                data.MeanDailyAirTemperature = (double)temperatureE.Current.Value;
-                data.MinimumAirTemperature = (double)minimumTemperatureE.Current.Value;
-                data.MaximumAirTemperature = (double)maximumTemperatureE.Current.Value;
-                data.MeanDailyPrecipitation = (double)rainE.Current.Value;
-                data.RelativeHumidity = (double)relativeHumidityE.Current.Value;
-                data.SolarRadiation = (double)solarRadiationE.Current.Value; // Note: Nasa provides this value with units of measurement of MJ/m^2/day which is what the evapotranspiration calculator expects. No conversion is needed here
+                data.Year = int.Parse(rainE.Current.Name.Substring(0, 4));
+                data.MeanDailyAirTemperature = temperatureE.Current.Value.GetDouble();
+                data.MinimumAirTemperature = minimumTemperatureE.Current.Value.GetDouble();
+                data.MaximumAirTemperature = maximumTemperatureE.Current.Value.GetDouble();
+                data.MeanDailyPrecipitation = rainE.Current.Value.GetDouble();
+                data.RelativeHumidity = relativeHumidityE.Current.Value.GetDouble();
+                data.SolarRadiation = solarRadiationE.Current.Value.GetDouble();
 
                 if (this.IsValidDailyData(data) == false)
                 {
@@ -203,7 +205,7 @@ namespace H.Core.Providers.Climate
                 }
 
                 data.Date = new DateTime(data.Year, 1, 1).AddDays(data.JulianDay - 1);
-                
+
                 customClimateData.Add(data);
             }
 

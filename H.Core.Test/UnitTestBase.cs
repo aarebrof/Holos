@@ -102,21 +102,6 @@ namespace H.Core.Test
         #endregion
 
         #region Public Methods
-        public Storage InitializeStorage()
-        {
-            var storage = new Storage
-            {
-                ApplicationData = new ApplicationData
-                {
-                    GlobalSettings = new GlobalSettings
-                    {
-                        ActiveFarm = new Farm()
-                    }
-                }
-            };
-
-            return storage;
-        }
 
         public ManagementPeriod GetTestManagementPeriod()
         {
@@ -209,7 +194,7 @@ namespace H.Core.Test
              * Manure exports
              */
 
-            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData(){NitrogenContent = 0.5}});
+            farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 1000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 } });
             farm.ManureExportViewItems.Add(new ManureExportViewItem() { DateOfExport = DateTime.Now, Amount = 2000, AnimalType = AnimalType.Dairy, DefaultManureCompositionData = new DefaultManureCompositionData() { NitrogenContent = 0.5 } });
 
             return farm;
@@ -272,7 +257,7 @@ namespace H.Core.Test
 
         public GroupEmissionsByDay GetGroupEmissionsByDay()
         {
-            return  new GroupEmissionsByDay()
+            return new GroupEmissionsByDay()
             {
                 AdjustedAmountOfTanInStoredManureOnDay = 100,
                 OrganicNitrogenCreatedOnDay = 50,
@@ -435,7 +420,7 @@ namespace H.Core.Test
             return fertilizerApplicationViewItem;
         }
 
-        public SoilData GetTestSoilData( )
+        public SoilData GetTestSoilData()
         {
             var soilData = new SoilData();
             soilData.EcodistrictId = 679;
@@ -548,22 +533,6 @@ namespace H.Core.Test
             };
 
             return manureExportViewItem;
-        }
-
-        public Storage GetTestStorage()
-        {
-            var storage = new Storage();
-
-            var farm = this.GetTestFarm();
-            var applicationData = new ApplicationData();
-            applicationData.GlobalSettings = new GlobalSettings();
-            storage.ApplicationData = applicationData;
-
-            storage.ApplicationData.Farms.Add(farm);
-            
-            applicationData.GlobalSettings.ActiveFarm = farm;
-            ;
-            return storage;
         }
 
         #endregion
