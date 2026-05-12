@@ -51,7 +51,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farm = new Farm();
 
             var residuesSubstrateViewItem = new FarmResiduesSubstrateViewItem
-                { FarmResidueType = FarmResidueType.BarleyStraw };
+            { FarmResidueType = FarmResidueType.BarleyStraw };
             residuesSubstrateViewItem.FlowRate = 0.5;
             residuesSubstrateViewItem.TotalSolids = 0.5;
             residuesSubstrateViewItem.VolatileSolids = 0.1;
@@ -61,7 +61,7 @@ namespace H.Core.Test.Calculators.Infrastructure
             residuesSubstrateViewItem.MethaneFraction = 0.5;
 
             var manureSubstrateViewItem = new ManureSubstrateViewItem
-                { AnimalType = AnimalType.Beef, ManureSubstrateState = ManureSubstrateState.Fresh };
+            { AnimalType = AnimalType.Beef, ManureSubstrateState = ManureSubstrateState.Fresh };
             manureSubstrateViewItem.FlowRate = 1.25;
             manureSubstrateViewItem.TotalSolids = 0.75;
             manureSubstrateViewItem.VolatileSolids = 0.1;
@@ -209,9 +209,9 @@ namespace H.Core.Test.Calculators.Infrastructure
         public void GetFlowsFromDailyResultsReturnsCorrectNumberOfItems()
         {
             _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem
-                { ManagementPeriod = _managementPeriod1, IsSelected = true });
+            { ManagementPeriod = _managementPeriod1, IsSelected = true });
             _component.ManagementPeriodViewItems.Add(new ADManagementPeriodViewItem
-                { ManagementPeriod = _managementPeriod2, IsSelected = true });
+            { ManagementPeriod = _managementPeriod2, IsSelected = true });
 
             var results = _sut.GetDailyManureFlowRates(_farm, _animalComponentResults, _component);
 
@@ -225,8 +225,9 @@ namespace H.Core.Test.Calculators.Infrastructure
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
             _component.AnaerobicDigestionViewItem.ManureSubstrateViewItems.Clear();
 
-            _farmResidue1.StartDate = DateTime.Now;
-            _farmResidue1.EndDate = DateTime.Now.AddDays(3);
+            var date = DateTime.Now;
+            _farmResidue1.StartDate = date;
+            _farmResidue1.EndDate = date.AddDays(3);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
 
             var results = _sut.GetDailyFarmResidueFlowRates(_component);
@@ -272,12 +273,13 @@ namespace H.Core.Test.Calculators.Infrastructure
         {
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Clear();
 
-            _farmResidue1.StartDate = DateTime.Now;
-            _farmResidue1.EndDate = DateTime.Now.AddDays(1);
+            var date = DateTime.Now;
+            _farmResidue1.StartDate = date;
+            _farmResidue1.EndDate = date.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
 
-            _farmResidue2.StartDate = DateTime.Now;
-            _farmResidue2.EndDate = DateTime.Now.AddDays(1);
+            _farmResidue2.StartDate = date;
+            _farmResidue2.EndDate = date.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
             var flows = _sut.GetDailyFarmResidueFlowRates(_component);
@@ -306,12 +308,14 @@ namespace H.Core.Test.Calculators.Infrastructure
             _farmResidue2.MethaneFraction = 0.05;
             _farmResidue2.BiomethanePotential = 0.11;
 
-            _farmResidue1.StartDate = DateTime.Now;
-            _farmResidue1.EndDate = DateTime.Now.AddDays(1);
+            var date = DateTime.Now;
+
+            _farmResidue1.StartDate = date;
+            _farmResidue1.EndDate = date.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue1);
 
-            _farmResidue2.StartDate = DateTime.Now;
-            _farmResidue2.EndDate = DateTime.Now.AddDays(1);
+            _farmResidue2.StartDate = date;
+            _farmResidue2.EndDate = date.AddDays(1);
             _component.AnaerobicDigestionViewItem.FarmResiduesSubstrateViewItems.Add(_farmResidue2);
 
             var flows = _sut.GetDailyFarmResidueFlowRates(_component);

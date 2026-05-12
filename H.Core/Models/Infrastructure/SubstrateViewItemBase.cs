@@ -7,7 +7,7 @@ namespace H.Core.Models.Infrastructure
     public class SubstrateViewItemBase : ModelBase
     {
         #region Fields
-        
+
         private double _biomethanePotential;
         private double _methaneFraction;
         private double _volatileSolids;
@@ -31,8 +31,9 @@ namespace H.Core.Models.Infrastructure
 
         public SubstrateViewItemBase()
         {
-            this.StartDate = DateTime.Now;
-            this.EndDate = DateTime.Now.AddDays(1);
+            var date = DateTime.Now;
+            this.StartDate = date;
+            this.EndDate = date.AddDays(1);
         }
 
         #endregion
@@ -68,7 +69,8 @@ namespace H.Core.Models.Infrastructure
         ///
         /// (fraction wet weight)
         /// </summary>
-        public double VolatileSolidsContent {
+        public double VolatileSolidsContent
+        {
             get
             {
                 return _volatileSolidsContent;
@@ -76,12 +78,14 @@ namespace H.Core.Models.Infrastructure
             set
             {
                 SetProperty(ref _volatileSolidsContent, value);
-            } }
+            }
+        }
 
         /// <summary>
         /// (fraction wet weight)
         /// </summary>
-        public double NitrogenContent {
+        public double NitrogenContent
+        {
             get
             {
                 return _nitrogenContent;
@@ -89,12 +93,14 @@ namespace H.Core.Models.Infrastructure
             set
             {
                 SetProperty(ref _nitrogenContent, value);
-            } }
+            }
+        }
 
         /// <summary>
         /// (fraction wet weight)
         /// </summary>
-        public double CarbonContent {
+        public double CarbonContent
+        {
             get
             {
                 return _carbonContent;
@@ -102,7 +108,8 @@ namespace H.Core.Models.Infrastructure
             set
             {
                 SetProperty(ref _carbonContent, value);
-            } }
+            }
+        }
 
         /// <summary>
         /// (kg kg^-1)
