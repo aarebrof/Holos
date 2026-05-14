@@ -37,6 +37,7 @@ namespace H.Core.Providers.Climate
         // Timeout is in seconds. 60s = 1 minute.
         private const int Timeout = 60;
         private const int DataUndefined = -999;
+        private readonly Lock _lock = new();
 
         #endregion
 
@@ -293,7 +294,10 @@ namespace H.Core.Providers.Climate
 
                 Trace.TraceInformation($"{nameof(NasaClimateProvider)}: cached data was found.");
 
-                return File.ReadAllText(path);
+                lock (_lock)
+                {
+                    return File.ReadAllText(path);
+                }
             }
             else
             {
@@ -312,7 +316,10 @@ namespace H.Core.Providers.Climate
 
             var path = this.GetCachedPath(latitude, longitude);
 
-            File.WriteAllText(path, content); // Overwrite any existing file for now
+            lock (_lock)
+            {
+                File.WriteAllText(path, content); // Overwrite any existing file for now
+            }
         }
 
         /// <summary>

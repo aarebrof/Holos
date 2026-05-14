@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace H.Core.Calculators.Climate
 {
@@ -8,6 +9,7 @@ namespace H.Core.Calculators.Climate
         #region Fields
 
         private readonly Dictionary<Tuple<double, double, double>, double> _cache = new Dictionary<Tuple<double, double, double>, double>();
+        private readonly Lock _lock = new();
 
         #endregion
 
@@ -24,9 +26,13 @@ namespace H.Core.Calculators.Climate
         public double CalculateReferenceEvapotranspiration(double meanDailyTemperature, double solarRadiation, double relativeHumidity)
         {
             var key = new Tuple<double, double, double>(meanDailyTemperature, solarRadiation, relativeHumidity);
-            if (_cache.ContainsKey(key))
+
+            lock (_lock)
             {
-                return _cache[key];
+                if (_cache.ContainsKey(key))
+                {
+                    return _cache[key];
+                }
             }
 
             double term1 = 0.013;
@@ -44,13 +50,13 @@ namespace H.Core.Calculators.Climate
             }
 
             double term2 = meanDailyTemperature / (meanDailyTemperature + 15);
-            double term3 = (23.8856 * solarRadiation) + 50; 
+            double term3 = (23.8856 * solarRadiation) + 50;
             double term4 = 1 + ((50 - relativeHumidity) / 70);
 
             var result = 0d;
             if (relativeHumidity >= 50)
             {
-                result =  term1 * term2 * term3;
+                result = term1 * term2 * term3;
             }
             else
             {
@@ -63,7 +69,10 @@ namespace H.Core.Calculators.Climate
                 return 0;
             }
 
-            _cache[key] = result;
+            lock (_lock)
+            {
+                _cache[key] = result;
+            }
 
             return result;
         }
