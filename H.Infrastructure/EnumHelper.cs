@@ -1,7 +1,7 @@
 ﻿#region Imports
 
 using System;
-using System.Collections.Generic;
+using System.Collections.Concurrent;
 using System.ComponentModel;
 
 #endregion
@@ -12,7 +12,7 @@ namespace H.Infrastructure
     /// </summary>
     public static class EnumHelper
     {
-        public static Dictionary<object, string> Dictionary { get; set; } = new Dictionary<object, string>();
+        public static ConcurrentDictionary<object, string> Dictionary { get; set; } = new ConcurrentDictionary<object, string>();
 
         #region Public Methods
 
@@ -40,7 +40,7 @@ namespace H.Infrastructure
                 {
                     var result = ((DescriptionAttribute)attrs[0]).Description;
 
-                    Dictionary.Add(enumerationValue, result);
+                    Dictionary.TryAdd(enumerationValue, result);
 
                     return result;
                 }

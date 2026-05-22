@@ -10,16 +10,19 @@ using H.Core.Services.Initialization.Crops;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 namespace H.Core.Services.Initialization
 {
-    public partial class InitializationService :  IInitializationService
+    public partial class InitializationService : IInitializationService
     {
         #region Fields
 
         private readonly ICropInitializationService _cropInitializationService;
         private readonly IAnimalInitializationService _animalInitializationService;
         private IInitializationService _initializationServiceImplementation;
+
+        private readonly Lock _lock = new();
 
         #endregion
 
@@ -28,9 +31,9 @@ namespace H.Core.Services.Initialization
         public InitializationService()
         {
             _cropInitializationService = new CropInitializationService();
-            _animalInitializationService =new AnimalInitializationService();
+            _animalInitializationService = new AnimalInitializationService();
         }
-        
+
         #endregion
 
         #region Public Methods
@@ -102,7 +105,7 @@ namespace H.Core.Services.Initialization
             _cropInitializationService.InitializeCarbonConcentration(viewItem, defaults);
         }
 
-        public void InitializeBiomassCoefficients (Farm farm)
+        public void InitializeBiomassCoefficients(Farm farm)
         {
             _cropInitializationService.InitializeBiomassCoefficients(farm);
         }
@@ -147,7 +150,7 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeYieldForYear(farm, viewItem, fieldSystemComponent);
         }
-        public void InitializeEconomicDefaults( Farm farm)
+        public void InitializeEconomicDefaults(Farm farm)
         {
             _cropInitializationService.InitializeEconomicDefaults(farm);
         }
@@ -257,7 +260,7 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeHarvestMethod(viewItem);
         }
-        public void InitializeFallow( Farm farm)
+        public void InitializeFallow(Farm farm)
         {
             _cropInitializationService.InitializeFallow(farm);
         }
@@ -267,7 +270,7 @@ namespace H.Core.Services.Initialization
         }
         public void InitializeTillageType(Farm farm)
         {
-            _cropInitializationService.InitializeTillageType( farm);
+            _cropInitializationService.InitializeTillageType(farm);
         }
         public void InitializeTillageType(CropViewItem viewItem, Farm farm)
         {
@@ -283,9 +286,9 @@ namespace H.Core.Services.Initialization
         {
             _cropInitializationService.InitializeUserDefaults(viewItem, globalSettings);
         }
-        public void InitializePerennialDefaults( Farm farm)
+        public void InitializePerennialDefaults(Farm farm)
         {
-            _cropInitializationService.InitializePerennialDefaults( farm);
+            _cropInitializationService.InitializePerennialDefaults(farm);
         }
         public void InitializePerennialDefaults(CropViewItem viewItem, Farm farm)
         {
@@ -294,7 +297,10 @@ namespace H.Core.Services.Initialization
 
         public void InitializeCrop(CropViewItem viewItem, Farm farm, GlobalSettings globalSettings)
         {
-            _cropInitializationService.InitializeCrop(viewItem, farm, globalSettings);
+            lock (_lock)
+            {
+                _cropInitializationService.InitializeCrop(viewItem, farm, globalSettings);
+            }
         }
 
         public void InitializeCrops(Farm farm, GlobalSettings globalSettings)

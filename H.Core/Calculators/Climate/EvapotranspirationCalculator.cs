@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading;
+using System.Collections.Concurrent;
 
 namespace H.Core.Calculators.Climate
 {
@@ -8,8 +7,7 @@ namespace H.Core.Calculators.Climate
     {
         #region Fields
 
-        private readonly Dictionary<Tuple<double, double, double>, double> _cache = new Dictionary<Tuple<double, double, double>, double>();
-        private readonly Lock _lock = new();
+        private readonly ConcurrentDictionary<Tuple<double, double, double>, double> _cache = new ConcurrentDictionary<Tuple<double, double, double>, double>();
 
         #endregion
 
@@ -27,12 +25,9 @@ namespace H.Core.Calculators.Climate
         {
             var key = new Tuple<double, double, double>(meanDailyTemperature, solarRadiation, relativeHumidity);
 
-            lock (_lock)
+            if (_cache.ContainsKey(key))
             {
-                if (_cache.ContainsKey(key))
-                {
-                    return _cache[key];
-                }
+                return _cache[key];
             }
 
             double term1 = 0.013;
@@ -69,10 +64,7 @@ namespace H.Core.Calculators.Climate
                 return 0;
             }
 
-            lock (_lock)
-            {
-                _cache[key] = result;
-            }
+            _cache[key] = result;
 
             return result;
         }
